@@ -159,7 +159,19 @@
             text-shadow: 2px 2px 0px #000, -2px -2px 0px var(--accent-red);
             border-bottom: 2px dashed var(--accent-red);
             padding-bottom: 5px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Afbeelding logo inline in de koptekst */
+        .inline-heading-logo {
+            height: 1.1em; /* Past zich automatisch aan op de font-grootte van 'OVER' */
+            width: auto;
+            vertical-align: middle;
+            object-fit: contain;
+            margin-bottom: 4px;
         }
 
         /* Social Media & Links Grid */
@@ -501,6 +513,10 @@
             .section-title {
                 font-size: 2rem;
             }
+
+            .inline-heading-logo {
+                height: 1em;
+            }
         }
     </style>
 </head>
@@ -600,7 +616,9 @@
 
         <!-- Band Bio & Line-up -->
         <section id="about">
-            <h2 class="section-title">Over SKIPPABEAT</h2>
+            <h2 class="section-title">
+                Over <img src="skippabeatbanner.jpg" alt="SKIPPABEAT" class="inline-heading-logo">
+            </h2>
             <div class="bio-grid">
                 <!-- Main Bio Text -->
                 <div class="bio-text">
@@ -611,7 +629,7 @@
                         <span>— 3voor12</span>
                     </div>
 
-                    <p>Al 12 jaar lang zet SKIPPABEAT elk podium op zijn kop met opzwepende ska-shows! Ontstaan uit de as van Manoman, is deze Bredase bende uitgegroeid tot een geoliede, Engelstalige ska-machine die stuiterende ska, rauwe punk en vette reggae in hoog tempo op je afstuurt.</p>
+                    <p>Al 12 jaar lang zet SKIPPABEAT elk podium op zijn kop met opzwepende ska-shows! Ontstaan uit de as van Manoman, is deze Bredase bende uitgegroeid tot een geoliede, Engelstalige ska-machine die stuiterendinge ska, rauwe punk en vette reggae in hoog tempo op je afstuurt.</p>
 
                     <p>Krachtige vocalen, explosieve MC gecombineerd met dikke samples, een pompende ritmesectie en vette blazerspartijen vormen samen de brandstof voor een energieke live-experience. Stilvallen is er niet bij; elk optreden wordt neergezet als een uitbundig feestje.</p>
 
