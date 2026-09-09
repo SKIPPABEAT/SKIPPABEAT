@@ -277,14 +277,39 @@
             border: 0;
         }
 
-        /* Nieuws Sectie Styles */
+        /* Swipable Nieuws Slider Styles */
+        .news-slider-container {
+            position: relative;
+        }
+
         .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
             gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 15px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .news-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .news-grid::-webkit-scrollbar-track {
+            background: #111;
+            border-radius: 3px;
+        }
+
+        .news-grid::-webkit-scrollbar-thumb {
+            background: var(--accent-yellow);
+            border-radius: 3px;
         }
 
         .news-card {
+            flex: 0 0 calc(50% - 10px);
+            min-width: 280px;
+            scroll-snap-align: start;
             background-color: var(--bg-card);
             border: 1px solid var(--border-gray);
             border-radius: 8px;
@@ -297,7 +322,6 @@
 
         .news-card:hover {
             border-color: var(--accent-yellow);
-            transform: translateY(-3px);
         }
 
         .news-date {
@@ -318,6 +342,21 @@
             color: var(--text-muted);
             font-size: 0.95rem;
             line-height: 1.5;
+        }
+
+        .swipe-hint {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 6px;
+        }
+
+        .swipe-hint i {
+            color: var(--accent-yellow);
         }
 
         /* Bio Layout */
@@ -608,6 +647,10 @@
                 display: flex;
             }
 
+            .news-card {
+                flex: 0 0 85%;
+            }
+
             .bio-grid, .two-column-grid {
                 grid-template-columns: 1fr;
             }
@@ -732,28 +775,37 @@
             </div>
         </section>
 
-        <!-- Nieuws & Updates Sectie -->
+        <!-- Swipable Nieuws & Updates Sectie -->
         <section id="news">
             <h2 class="section-title" data-i18n="section-news">Nieuws & Updates</h2>
-            <div class="news-grid">
-                <div class="news-card">
-                    <div>
-                        <div class="news-date">September 2026</div>
-                        <h3 data-i18n="news-1-title">Afscheid Marco & Mark</h3>
-                        <p data-i18n="news-1-text">Wat een avond.
-Op 30 augustus speelden we het laatste optreden met Marco en Mark in Café Parkzicht, Breda. De zaal was tot de nok gevuld, de sfeer intens, het feest groots.
-Samen met jullie hebben we hun jarenlange inzet, energie en muzikaliteit gevierd.
-Dank aan iedereen die deze bijzondere avond heeft gedeeld, maar vooral BEDANKT MARCO & MARK!</p>
+            <div class="swipe-hint" data-i18n="swipe-hint">
+                <i class="fas fa-arrow-right"></i> Swipe voor oudere berichten
+            </div>
+            <div class="news-slider-container">
+                <div class="news-grid">
+                    <!-- Bericht 1: September 2026 (Meest recent) -->
+                    <div class="news-card">
+                        <div>
+                            <div class="news-date" data-i18n="news-1-date">September 2026</div>
+                            <h3 data-i18n="news-1-title">Wat een avond! Afscheid Marco & Mark</h3>
+                            <p data-i18n="news-1-text">Op 30 augustus speelden we het laatste optreden met Marco en Mark in Café Parkzicht, Breda. De zaal was tot de nok gevuld, de sfeer intens, het feest groots. Samen met jullie hebben we hun jarenlange inzet, energie en muzikaliteit gevierd. Dank aan iedereen die deze bijzondere avond heeft gedeeld!</p>
+                        </div>
                     </div>
-                </div>
-                <div class="news-card">
-                    <div>
-                        <div class="news-date">Augustus 2026</div>
-                        <h3 data-i18n="news-2-title">Nieuwe bandleden</h3>
-                        <p data-i18n="news-2-text">Onze oproep voor nieuwe bandleden werd massaal gedeeld en we kregen een enorme hoeveelheid berichten, tips en aanmeldingen. Het was geweldig om te zien hoeveel mensen met ons meeleven en Skippabeat blijven volgen.
-
-Dankzij al die support kunnen we met trots zeggen dat Skippabeat weer compleet is.
-Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!</p>
+                    <!-- Bericht 2: Augustus 2026 -->
+                    <div class="news-card">
+                        <div>
+                            <div class="news-date" data-i18n="news-2-date">Augustus 2026</div>
+                            <h3 data-i18n="news-2-title">De band is weer compleet!</h3>
+                            <p data-i18n="news-2-text">Onze oproep voor nieuwe bandleden werd massaal gedeeld en we kregen een enorme hoeveelheid berichten, tips en aanmeldingen. Geweldig dat zoveel mensen met ons meeleven! Dankzij al die support kunnen we met trots zeggen dat Skippabeat weer compleet is. Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!</p>
+                        </div>
+                    </div>
+                    <!-- Bericht 3: Juli 2026 (Ouder, zichtbaar na swipen) -->
+                    <div class="news-card">
+                        <div>
+                            <div class="news-date" data-i18n="news-3-date">Juli 2026</div>
+                            <h3 data-i18n="news-3-title">Nieuwe bandleden gezocht</h3>
+                            <p data-i18n="news-3-text">Skippabeat zoekt nieuwe leden! We zijn op zoek naar een ska-gitarist(e), trombonist(e) en trompettist(e). Zin om mee te knallen? Stuur ons een bericht!</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -908,10 +960,16 @@ Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!</p>
                 "socials-title": "Volg, Beluister & Shop",
                 "section-video": "Video",
                 "section-news": "Nieuws & Updates",
-                "news-1-title": "Nieuwe EP op komst!",
-                "news-1-text": "We duiken binnenkort de studio in voor de opnames van onze gloednieuwe EP. Verwacht energieke ska-beats, rauwe blazers en nieuwe favorieten!",
-                "news-2-title": "Nieuwe Live Video's Online",
-                "news-2-text": "Bekijk onze nieuwste live registraties nu op ons YouTube-kanaal. Blijf skanken en vergeet je niet te abonneren!",
+                "swipe-hint": '<i class="fas fa-arrow-right"></i> Swipe voor oudere berichten',
+                "news-1-date": "September 2026",
+                "news-1-title": "Wat een avond! Afscheid Marco & Mark",
+                "news-1-text": "Op 30 augustus speelden we het laatste optreden met Marco en Mark in Café Parkzicht, Breda. De zaal was tot de nok gevuld, de sfeer intens, het feest groots. Samen met jullie hebben we hun jarenlange inzet, energie en muzikaliteit gevierd. Dank aan iedereen die deze bijzondere avond heeft gedeeld!",
+                "news-2-date": "Augustus 2026",
+                "news-2-title": "De band is weer compleet!",
+                "news-2-text": "Onze oproep voor nieuwe bandleden werd massaal gedeeld en we kregen een enorme hoeveelheid berichten, tips en aanmeldingen. Geweldig dat zoveel mensen met ons meeleven! Dankzij al die support kunnen we met trots zeggen dat Skippabeat weer compleet is. Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!",
+                "news-3-date": "Juli 2026",
+                "news-3-title": "Nieuwe bandleden gezocht",
+                "news-3-text": "Skippabeat zoekt nieuwe leden! We zijn op zoek naar een ska-gitarist(e), trombonist(e) en trompettist(e). Zin om mee te knallen? Stuur ons een bericht!",
                 "section-agenda": "Live Agenda",
                 "month-oct": "OKT 2026",
                 "btn-tickets": "Tickets & Info",
@@ -960,10 +1018,16 @@ Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!</p>
                 "socials-title": "Follow, Listen & Shop",
                 "section-video": "Video",
                 "section-news": "News & Updates",
-                "news-1-title": "New EP Coming Soon!",
-                "news-1-text": "We are hitting the studio soon to record our brand-new EP. Expect energetic ska beats, raw brass lines, and new fan favorites!",
-                "news-2-title": "New Live Videos Online",
-                "news-2-text": "Check out our latest live videos on our YouTube channel. Keep skankin' and don't forget to subscribe!",
+                "swipe-hint": '<i class="fas fa-arrow-right"></i> Swipe for older posts',
+                "news-1-date": "September 2026",
+                "news-1-title": "What a night! Farewell Marco & Mark",
+                "news-1-text": "On August 30th we played our final show with Marco and Mark at Café Parkzicht, Breda. The venue was packed to the brim, the atmosphere intense, and the party wild. Together with you, we celebrated their years of dedication, energy, and music. Thank you to everyone who shared this special night with us!",
+                "news-2-date": "August 2026",
+                "news-2-title": "The band is complete again!",
+                "news-2-text": "Our call for new band members was shared massively, resulting in a huge wave of messages, leads, and applications. Awesome to see so many people care about Skippabeat! Thanks to all that support, we can proudly say Skippabeat is fully complete again. New faces, new energy — ready for the next round of shows!",
+                "news-3-date": "July 2026",
+                "news-3-title": "New band members wanted",
+                "news-3-text": "Skippabeat is looking for new members! We are searching for a ska guitarist, trombonist, and trumpeter. Ready to blow the roof off? Send us a message!",
                 "section-agenda": "Live Agenda",
                 "month-oct": "OCT 2026",
                 "btn-tickets": "Tickets & Info",
@@ -1012,10 +1076,16 @@ Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!</p>
                 "socials-title": "Suivez, Écoutez & Achetez",
                 "section-video": "Vidéo",
                 "section-news": "Actualités & Mises à jour",
-                "news-1-title": "Nouvel EP à venir !",
-                "news-1-text": "Nous entrons bientôt en studio pour enregistrer notre tout nouvel EP. Attendez-vous à des rythmes ska énergiques et des cuivres puissants !",
-                "news-2-title": "Nouvelles vidéos live en ligne",
-                "news-2-text": "Découvrez nos dernières vidéos live sur notre chaîne YouTube. N'oubliez pas de vous abonner !",
+                "swipe-hint": '<i class="fas fa-arrow-right"></i> Glissez pour les anciens messages',
+                "news-1-date": "Septembre 2026",
+                "news-1-title": "Quelle soirée ! Adieu Marco & Mark",
+                "news-1-text": "Le 30 août, nous avons joué notre dernier concert avec Marco et Mark au Café Parkzicht à Breda. La salle était comble, l'ambiance intense et la fête incroyable. Merci à tous d'avoir partagé cette soirée spéciale avec nous !",
+                "news-2-date": "Août 2026",
+                "news-2-title": "Le groupe est de nouveau au complet !",
+                "news-2-text": "Notre appel pour trouver de nouveaux membres a été largement partagé. Grâce à tout ce soutien, nous sommes fiers d'annoncer que Skippabeat est à nouveau au complet. Nouveaux visages, nouvelle énergie — prêts pour la suite !",
+                "news-3-date": "Juillet 2026",
+                "news-3-title": "Recherche de nouveaux musiciens",
+                "news-3-text": "Skippabeat recherche de nouveaux membres ! Nous cherchons un(e) guitariste ska, un(e) tromboniste et un(e) trompettiste. Envie de nous rejoindre ? Envoyez-nous un message !",
                 "section-agenda": "Concerts à venir",
                 "month-oct": "OCT 2026",
                 "btn-tickets": "Billets & Info",
@@ -1064,10 +1134,16 @@ Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!</p>
                 "socials-title": "Folgen, Hören & Shoppen",
                 "section-video": "Video",
                 "section-news": "Neuigkeiten & Updates",
-                "news-1-title": "Neue EP kommt bald!",
-                "news-1-text": "Wir gehen bald ins Studio, um unsere brandneue EP aufzunehmen. Erwartet treibende Ska-Beats, rauhe Bläser und neue Lieblingssongs!",
-                "news-2-title": "Neue Live-Videos online",
-                "news-2-text": "Schaut euch unsere neuesten Live-Aufnahmen auf unserem YouTube-Kanal an. Abonnieren nicht vergessen!",
+                "swipe-hint": '<i class="fas fa-arrow-right"></i> Wischen für ältere Beiträge',
+                "news-1-date": "September 2026",
+                "news-1-title": "Was für ein Abend! Abschied Marco & Mark",
+                "news-1-text": "Am 30. August spielten wir die letzte Show mit Marco und Mark im Café Parkzicht in Breda. Der Saal war gesteckt voll, die Stimmung intensiv, das Fest riesig. Danke an alle, die diesen besonderen Abend mit uns geteilt haben!",
+                "news-2-date": "August 2026",
+                "news-2-title": "Die Band ist wieder komplett!",
+                "news-2-text": "Unser Aufruf nach neuen Bandmitgliedern wurde riesig geteilt. Dank all der Unterstützung können wir stolz verkünden: Skippabeat ist wieder komplett. Neue Gesichter, neue Energie — bereit für die nächsten Shows!",
+                "news-3-date": "Juli 2026",
+                "news-3-title": "Neue Bandmitglieder gesucht",
+                "news-3-text": "Skippabeat sucht neue Mitglieder! Wir suchen eine(n) Ska-Gitarrist(en), Posaunist(en) und Trompeter(in). Lust mitzumachen? Schreib uns eine Nachricht!",
                 "section-agenda": "Live-Termine",
                 "month-oct": "OKT 2026",
                 "btn-tickets": "Tickets & Info",
@@ -1075,9 +1151,9 @@ Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!</p>
                 "about-title-prefix": "Über",
                 "bio-p1": "Die Ska-Band <strong>SKIPPABEAT</strong> aus Breda (Niederlande) ist zu einer festen Größe geworden. Mit ihren erstklassigen Musikern liefert SKIPPABEAT eine energiegeladene Ska-Show, die jeden zum Tanzen bringt!",
                 "quote-text": '"Ska mit einem großen S, Punk mit einem Augenzwinkern, ansteckend wie verrückt."',
-                "bio-p2": "Seit 12 Jahren stellt SKIPPABEAT jede Bühne mit mitreißenden Ska-Shows auf den Kopf! Aus der Asche von Manoman entstanden, hat sich die Truppe zu einer gut geölten Ska-Maschine entwickelt, die mitreißenden Ska, rauem Punk und satten Reggae im Eiltempo abliefert.",
+                "bio-p2": "Seit 12 Jahren stellt SKIPPABEAT jede Bühne mit mitreißenden Ska-Shows auf den Kopf! Aus der Asche von Manoman entstanden, hat sich die Truppe zu einer gut geölten Ska-Maschine entwickelt, die mitreißenden Ska, rauem Punk und satten Reggae im Eiltempo ablifert.",
                 "bio-p3": "Kraftvoller Gesang, ein explosiver MC kombiniert mit dicken Samples, eine pumpende Rhythmusgruppe und fett geblasene Bläsersätze sind der Treibstoff für ein energetisches Live-Erlebnis. Stillstehen gibt es nicht; jeder Auftritt wird zu einer ausgelassenen Party.",
-                "bio-p4": "Bewaffnet mit eigenen Tracks und unaufhaltsamer Live-Energie tourt die Band durch Festivals, Clubs und Kneipen. Zieh deine Tanzschuhe an, denn wenn SKIPPABEAT spielt, bebt der Saal!",
+                "bio-p4": "Bewaffnet mit eigenen Tracks und unaufhaltsamer Live-Energie tourt die Band durch Festivals, Clubs und Kneipen. Zieh deine Tanzschuhe an, denn wenn SKIPPABEAT speelt, bebt der Saal!",
                 "lineup-title": "Bandbesetzung",
                 "lineup-subtitle": "Elfköpfige Besetzung auf der Bühne:",
                 "role-vocals": "Gesang",
