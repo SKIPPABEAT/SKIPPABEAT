@@ -166,7 +166,7 @@
         .socials-section {
             text-align: center;
             background: #111;
-            padding: 30px 20px;
+            padding: 20px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
         }
@@ -175,20 +175,20 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 15px;
         }
 
         .social-card {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 20px;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
             background-color: var(--bg-card);
             color: var(--text-white);
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: 700;
+            border-radius: 50%;
             border: 1px solid var(--border-gray);
             transition: all 0.3s ease;
         }
@@ -201,7 +201,7 @@
         }
 
         .social-card i {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
         }
 
         .social-card.spotify:hover i { color: #1DB954; }
@@ -541,27 +541,27 @@
 
     <div class="container">
         
-        <!-- Socials & Merch Buttons -->
+        <!-- Socials & Merch Buttons (Alleen Icoontjes) -->
         <section class="socials-section">
             <h2 style="font-family: 'Permanent Marker', cursive; color: var(--accent-yellow); font-size: 1.8rem;">Volg, Beluister & Shop</h2>
             <div class="socials-grid">
-                <a href="https://open.spotify.com/artist/3bOukEWTf5rJq3fXRO6x4N?si=EwMVB0sTTLGNh08FFKpNjw" target="_blank" class="social-card spotify">
-                    <i class="fab fa-spotify"></i> Spotify
+                <a href="https://open.spotify.com/artist/3bOukEWTf5rJq3fXRO6x4N?si=EwMVB0sTTLGNh08FFKpNjw" target="_blank" class="social-card spotify" title="Spotify" aria-label="Spotify">
+                    <i class="fab fa-spotify"></i>
                 </a>
-                <a href="https://www.youtube.com/@skippabeat6134/videos" target="_blank" class="social-card youtube">
-                    <i class="fab fa-youtube"></i> YouTube
+                <a href="https://www.youtube.com/@skippabeat6134/videos" target="_blank" class="social-card youtube" title="YouTube" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
                 </a>
-                <a href="https://www.facebook.com/skippabeatNL" target="_blank" class="social-card facebook">
-                    <i class="fab fa-facebook"></i> Facebook
+                <a href="https://www.facebook.com/skippabeatNL" target="_blank" class="social-card facebook" title="Facebook" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
                 </a>
-                <a href="https://www.instagram.com/skippabeatnl/" target="_blank" class="social-card instagram">
-                    <i class="fab fa-instagram"></i> Instagram
+                <a href="https://www.instagram.com/skippabeatnl/" target="_blank" class="social-card instagram" title="Instagram" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" class="social-card songkick">
-                    <i class="fas fa-ticket-alt"></i> Songkick
+                <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" class="social-card songkick" title="Songkick" aria-label="Songkick">
+                    <i class="fas fa-ticket-alt"></i>
                 </a>
-                <a href="https://epicmerchstore.com/collection/artists/skippabeat/" target="_blank" class="social-card merch">
-                    <i class="fas fa-shopping-bag"></i> Official Merch
+                <a href="https://epicmerchstore.com/collection/artists/skippabeat/" target="_blank" class="social-card merch" title="Official Merch" aria-label="Official Merch">
+                    <i class="fas fa-shopping-bag"></i>
                 </a>
             </div>
         </section>
