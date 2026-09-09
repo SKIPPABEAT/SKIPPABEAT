@@ -417,6 +417,31 @@
             color: #000;
         }
 
+        /* Merch Afbeelding Sectie */
+        .merch-image-section {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .merch-image-section a {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .merch-image-section a:hover {
+            transform: scale(1.02);
+        }
+
+        .merch-image-section img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-gray);
+        }
+
         /* Contact Box */
         .contact-box {
             background-color: var(--accent-yellow);
@@ -685,8 +710,15 @@
             </section>
         </div>
 
+        <!-- Klikbare Merch Afbeelding Sectie -->
+        <section class="merch-image-section">
+            <a href="https://epicmerchstore.com/collection/artists/skippabeat/" target="_blank" rel="noopener noreferrer">
+                <img src="skippamerch.jpg" alt="Skippa Merch">
+            </a>
+        </section>
+
         <!-- Contact Section -->
-        <section id="contact" style="margin-top: 50px;">
+        <section id="contact">
             <div class="contact-box">
                 <h2>Boekingen & Contact</h2>
                 <p>Wil je SKIPPABEAT op jouw festival, podium of feest?</p>
