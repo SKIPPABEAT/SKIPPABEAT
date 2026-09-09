@@ -277,6 +277,49 @@
             border: 0;
         }
 
+        /* Nieuws Sectie Styles */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .news-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .news-card:hover {
+            border-color: var(--accent-yellow);
+            transform: translateY(-3px);
+        }
+
+        .news-date {
+            font-size: 0.85rem;
+            color: var(--accent-yellow);
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .news-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-white);
+            margin-bottom: 10px;
+        }
+
+        .news-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
         /* Bio Layout */
         .bio-grid {
             display: grid;
@@ -517,7 +560,7 @@
             margin-top: 40px;
         }
 
-        /* Responsive Mobile Styles Fix */
+        /* Responsive Mobile Styles */
         @media (max-width: 768px) {
             .nav-container {
                 flex-wrap: nowrap;
@@ -532,7 +575,7 @@
             }
 
             .nav-email span {
-                display: none; /* Verberg het e-mailadres op mobiel om ruimte te besparen */
+                display: none;
             }
 
             .lang-switch {
@@ -636,6 +679,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" data-i18n="nav-home">Home</a></li>
                 <li><a href="#video" data-i18n="nav-video">Video</a></li>
+                <li><a href="#news" data-i18n="nav-news">Nieuws</a></li>
                 <li><a href="#agenda" data-i18n="nav-agenda">Agenda</a></li>
                 <li><a href="#about" data-i18n="nav-about">Over de Band</a></li>
                 <li><a href="#disco" data-i18n="nav-disco">Discografie</a></li>
@@ -685,6 +729,33 @@
             <h2 class="section-title" data-i18n="section-video">Video</h2>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/Vga_2ITu6IU" title="SKIPPABEAT - Promo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Nieuws & Updates Sectie -->
+        <section id="news">
+            <h2 class="section-title" data-i18n="section-news">Nieuws & Updates</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div>
+                        <div class="news-date">September 2026</div>
+                        <h3 data-i18n="news-1-title">Afscheid Marco & Mark</h3>
+                        <p data-i18n="news-1-text">Wat een avond.
+Op 30 augustus speelden we het laatste optreden met Marco en Mark in Café Parkzicht, Breda. De zaal was tot de nok gevuld, de sfeer intens, het feest groots.
+Samen met jullie hebben we hun jarenlange inzet, energie en muzikaliteit gevierd.
+Dank aan iedereen die deze bijzondere avond heeft gedeeld, maar vooral BEDANKT MARCO & MARK!</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div>
+                        <div class="news-date">Augustus 2026</div>
+                        <h3 data-i18n="news-2-title">Nieuwe bandleden</h3>
+                        <p data-i18n="news-2-text">Onze oproep voor nieuwe bandleden werd massaal gedeeld en we kregen een enorme hoeveelheid berichten, tips en aanmeldingen. Het was geweldig om te zien hoeveel mensen met ons meeleven en Skippabeat blijven volgen.
+
+Dankzij al die support kunnen we met trots zeggen dat Skippabeat weer compleet is.
+Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -828,6 +899,7 @@
             nl: {
                 "nav-home": "Home",
                 "nav-video": "Video",
+                "nav-news": "Nieuws",
                 "nav-agenda": "Agenda",
                 "nav-about": "Over de Band",
                 "nav-disco": "Discografie",
@@ -835,6 +907,11 @@
                 "nav-contact": "Contact",
                 "socials-title": "Volg, Beluister & Shop",
                 "section-video": "Video",
+                "section-news": "Nieuws & Updates",
+                "news-1-title": "Nieuwe EP op komst!",
+                "news-1-text": "We duiken binnenkort de studio in voor de opnames van onze gloednieuwe EP. Verwacht energieke ska-beats, rauwe blazers en nieuwe favorieten!",
+                "news-2-title": "Nieuwe Live Video's Online",
+                "news-2-text": "Bekijk onze nieuwste live registraties nu op ons YouTube-kanaal. Blijf skanken en vergeet je niet te abonneren!",
                 "section-agenda": "Live Agenda",
                 "month-oct": "OKT 2026",
                 "btn-tickets": "Tickets & Info",
@@ -874,6 +951,7 @@
             en: {
                 "nav-home": "Home",
                 "nav-video": "Video",
+                "nav-news": "News",
                 "nav-agenda": "Tour Dates",
                 "nav-about": "About the Band",
                 "nav-disco": "Discography",
@@ -881,6 +959,11 @@
                 "nav-contact": "Contact",
                 "socials-title": "Follow, Listen & Shop",
                 "section-video": "Video",
+                "section-news": "News & Updates",
+                "news-1-title": "New EP Coming Soon!",
+                "news-1-text": "We are hitting the studio soon to record our brand-new EP. Expect energetic ska beats, raw brass lines, and new fan favorites!",
+                "news-2-title": "New Live Videos Online",
+                "news-2-text": "Check out our latest live videos on our YouTube channel. Keep skankin' and don't forget to subscribe!",
                 "section-agenda": "Live Agenda",
                 "month-oct": "OCT 2026",
                 "btn-tickets": "Tickets & Info",
@@ -920,6 +1003,7 @@
             fr: {
                 "nav-home": "Accueil",
                 "nav-video": "Vidéo",
+                "nav-news": "Actualités",
                 "nav-agenda": "Concerts",
                 "nav-about": "Le Groupe",
                 "nav-disco": "Discographie",
@@ -927,6 +1011,11 @@
                 "nav-contact": "Contact",
                 "socials-title": "Suivez, Écoutez & Achetez",
                 "section-video": "Vidéo",
+                "section-news": "Actualités & Mises à jour",
+                "news-1-title": "Nouvel EP à venir !",
+                "news-1-text": "Nous entrons bientôt en studio pour enregistrer notre tout nouvel EP. Attendez-vous à des rythmes ska énergiques et des cuivres puissants !",
+                "news-2-title": "Nouvelles vidéos live en ligne",
+                "news-2-text": "Découvrez nos dernières vidéos live sur notre chaîne YouTube. N'oubliez pas de vous abonner !",
                 "section-agenda": "Concerts à venir",
                 "month-oct": "OCT 2026",
                 "btn-tickets": "Billets & Info",
@@ -966,6 +1055,7 @@
             de: {
                 "nav-home": "Startseite",
                 "nav-video": "Video",
+                "nav-news": "Neuigkeiten",
                 "nav-agenda": "Termine",
                 "nav-about": "Über die Band",
                 "nav-disco": "Diskografie",
@@ -973,6 +1063,11 @@
                 "nav-contact": "Kontakt",
                 "socials-title": "Folgen, Hören & Shoppen",
                 "section-video": "Video",
+                "section-news": "Neuigkeiten & Updates",
+                "news-1-title": "Neue EP kommt bald!",
+                "news-1-text": "Wir gehen bald ins Studio, um unsere brandneue EP aufzunehmen. Erwartet treibende Ska-Beats, rauhe Bläser und neue Lieblingssongs!",
+                "news-2-title": "Neue Live-Videos online",
+                "news-2-text": "Schaut euch unsere neuesten Live-Aufnahmen auf unserem YouTube-Kanal an. Abonnieren nicht vergessen!",
                 "section-agenda": "Live-Termine",
                 "month-oct": "OKT 2026",
                 "btn-tickets": "Tickets & Info",
