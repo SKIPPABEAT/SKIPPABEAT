@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKIPPABEAT - Rocksteady Reggae Punk Whatever Ska</title>
-    <!-- Font Awesome voor Social Media Icons -->
+    <!-- Font Awesome voor Social Media Icons & Vlaggen -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts voor Ska / Punk Sfeer -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,6 +68,12 @@
             padding: 12px 20px;
         }
 
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .nav-email {
             display: flex;
             align-items: center;
@@ -84,12 +90,44 @@
             color: var(--text-white);
         }
 
-        .nav-email:hover {
+        .nav-email:hover, .nav-email:hover i {
             color: var(--accent-yellow);
         }
 
-        .nav-email:hover i {
-            color: var(--accent-yellow);
+        /* Language Switcher Styles */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            opacity: 0.5;
+            transition: opacity 0.2s, border-color 0.2s;
+        }
+
+        .lang-btn.active {
+            opacity: 1;
+            border-color: var(--accent-yellow);
+        }
+
+        .lang-btn:hover {
+            opacity: 0.9;
+        }
+
+        .flag-icon {
+            width: 24px;
+            height: 16px;
+            object-fit: cover;
+            border-radius: 2px;
+            display: block;
         }
 
         .nav-links {
@@ -167,7 +205,7 @@
 
         /* Afbeelding logo inline in de koptekst */
         .inline-heading-logo {
-            height: 1.1em; /* Past zich automatisch aan op de font-grootte van 'OVER' */
+            height: 1.1em;
             width: auto;
             vertical-align: middle;
             object-fit: contain;
@@ -212,10 +250,7 @@
             border-color: var(--accent-yellow);
         }
 
-        .social-card i {
-            font-size: 1.5rem;
-        }
-
+        .social-card i { font-size: 1.5rem; }
         .social-card.spotify:hover i { color: #1DB954; }
         .social-card.facebook:hover i { color: #1877F2; }
         .social-card.instagram:hover i { color: #E4405F; }
@@ -226,7 +261,7 @@
         /* Embedded YouTube Video */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 8px;
@@ -491,6 +526,10 @@
 
         /* Responsive Mobile Styles */
         @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
             .nav-links {
                 display: none;
                 flex-direction: column;
@@ -553,21 +592,34 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="mailto:skippabeatnl@gmail.com" class="nav-email">
-                <i class="fas fa-envelope"></i>
-                <span>skippabeatnl@gmail.com</span>
-            </a>
+            <div class="nav-left">
+                <a href="mailto:skippabeatnl@gmail.com" class="nav-email">
+                    <i class="fas fa-envelope"></i>
+                    <span>skippabeatnl@gmail.com</span>
+                </a>
+                
+                <!-- Language Switcher -->
+                <div class="lang-switch">
+                    <button class="lang-btn active" id="btn-nl" onclick="setLanguage('nl')" title="Nederlands" aria-label="Nederlands">
+                        <img src="https://flagcdn.com/w40/nl.png" alt="Nederlands" class="flag-icon">
+                    </button>
+                    <button class="lang-btn" id="btn-en" onclick="setLanguage('en')" title="English" aria-label="English">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="English" class="flag-icon">
+                    </button>
+                </div>
+            </div>
+
             <button class="mobile-menu-btn" id="menuToggle" aria-label="Menu">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#video">Video</a></li>
-                <li><a href="#agenda">Agenda</a></li>
-                <li><a href="#about">Over de Band</a></li>
-                <li><a href="#disco">Discografie</a></li>
-                <li><a href="#shows">Historie</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" data-i18n="nav-home">Home</a></li>
+                <li><a href="#video" data-i18n="nav-video">Video</a></li>
+                <li><a href="#agenda" data-i18n="nav-agenda">Agenda</a></li>
+                <li><a href="#about" data-i18n="nav-about">Over de Band</a></li>
+                <li><a href="#disco" data-i18n="nav-disco">Discografie</a></li>
+                <li><a href="#shows" data-i18n="nav-shows">Historie</a></li>
+                <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -582,9 +634,9 @@
 
     <div class="container">
         
-        <!-- Socials & Merch Buttons (Alleen Icoontjes) -->
+        <!-- Socials & Merch Buttons -->
         <section class="socials-section">
-            <h2 style="font-family: 'Permanent Marker', cursive; color: var(--accent-yellow); font-size: 1.8rem;">Volg, Beluister & Shop</h2>
+            <h2 style="font-family: 'Permanent Marker', cursive; color: var(--accent-yellow); font-size: 1.8rem;" data-i18n="socials-title">Volg, Beluister & Shop</h2>
             <div class="socials-grid">
                 <a href="https://open.spotify.com/artist/3bOukEWTf5rJq3fXRO6x4N?si=EwMVB0sTTLGNh08FFKpNjw" target="_blank" class="social-card spotify" title="Spotify" aria-label="Spotify">
                     <i class="fab fa-spotify"></i>
@@ -609,7 +661,7 @@
 
         <!-- Featured YouTube Video -->
         <section id="video">
-            <h2 class="section-title">Video</h2>
+            <h2 class="section-title" data-i18n="section-video">Video</h2>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/Vga_2ITu6IU" title="SKIPPABEAT - Promo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
@@ -617,24 +669,24 @@
 
         <!-- Live Agenda / Tour Section -->
         <section id="agenda">
-            <h2 class="section-title">Live Agenda</h2>
+            <h2 class="section-title" data-i18n="section-agenda">Live Agenda</h2>
             <div class="agenda-list">
-                <!-- Enige Show -->
+                <!-- Show -->
                 <div class="agenda-item">
                     <div class="agenda-date">
                         <span class="day">10</span>
-                        <span class="month">OKT 2026</span>
+                        <span class="month" data-i18n="month-oct">OKT 2026</span>
                     </div>
                     <div class="agenda-details">
                         <h3>GoudSKAfestival</h3>
                         <p><i class="fas fa-map-marker-alt" style="color: var(--accent-red);"></i> Gouda, NL — Studio Gonz</p>
                     </div>
                     <div class="agenda-action">
-                        <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" class="btn-ticket">Tickets & Info</a>
+                        <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" class="btn-ticket" data-i18n="btn-tickets">Tickets & Info</a>
                     </div>
                 </div>
             </div>
-            <p style="text-align: center; margin-top: 20px; font-size: 0.95rem; color: var(--text-muted);">
+            <p style="text-align: center; margin-top: 20px; font-size: 0.95rem; color: var(--text-muted);" data-i18n="agenda-footer">
                 Blijf op de hoogte van nieuwe showbekendmakingen via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> en onze socials!
             </p>
         </section>
@@ -642,42 +694,42 @@
         <!-- Band Bio & Line-up -->
         <section id="about">
             <h2 class="section-title">
-                Over <img src="skippabeatsmall.jpg" alt="SKIPPABEAT" class="inline-heading-logo">
+                <span data-i18n="about-title-prefix">Over</span> <img src="skippabeatsmall.jpg" alt="SKIPPABEAT" class="inline-heading-logo">
             </h2>
             <div class="bio-grid">
                 <!-- Main Bio Text -->
                 <div class="bio-text">
-                    <p>De Bredase skaband <strong>SKIPPABEAT</strong> is uitgegroeid tot een vaste waarde in Breda en ver daarbuiten. Met hun topmuzikanten brengt SKIPPABEAT een energieke en veelzijdige ska-show die iedereen laat bewegen!</p>
+                    <p data-i18n="bio-p1">De Bredase skaband <strong>SKIPPABEAT</strong> is uitgegroeid tot een vaste waarde in Breda en ver daarbuiten. Met hun topmuzikanten brengt SKIPPABEAT een energieke en veelzijdige ska-show die iedereen laat bewegen!</p>
                     
                     <div class="quote-box">
-                        "Ska met een hoofdletter, punk met een knipoog, aanstekelijk als een malle."
+                        <span data-i18n="quote-text">"Ska met een hoofdletter, punk met een knipoog, aanstekelijk als een malle."</span>
                         <span>— 3voor12</span>
                     </div>
 
-                    <p>Al 12 jaar lang zet SKIPPABEAT elk podium op zijn kop met opzwepende ska-shows! Ontstaan uit de as van Manoman, is deze Bredase bende uitgegroeid tot een geoliede, Engelstalige ska-machine die stuiterendinge ska, rauwe punk en vette reggae in hoog tempo op je afstuurt.</p>
+                    <p data-i18n="bio-p2">Al 12 jaar lang zet SKIPPABEAT elk podium op zijn kop met opzwepende ska-shows! Ontstaan uit de as van Manoman, is deze Bredase bende uitgegroeid tot een geoliede, Engelstalige ska-machine die stuiterendinge ska, rauwe punk en vette reggae in hoog tempo op je afstuurt.</p>
 
-                    <p>Krachtige vocalen, explosieve MC gecombineerd met dikke samples, een pompende ritmesectie en vette blazerspartijen vormen samen de brandstof voor een energieke live-experience. Stilvallen is er niet bij; elk optreden wordt neergezet als een uitbundig feestje.</p>
+                    <p data-i18n="bio-p3">Krachtige vocalen, explosieve MC gecombineerd met dikke samples, een pompende ritmesectie en vette blazerspartijen vormen samen de brandstof voor een energieke live-experience. Stilvallen is er niet bij; elk optreden wordt neergezet als een uitbundig feestje.</p>
 
-                    <p>Gewapend met een arsenaal aan eigen tracks en een niet te stoppen live-energie raast de band langs feesten, kroegen en festivals. Trek je <em>skankin' shoes</em> maar vast aan, want als SKIPPABEAT speelt, gaat de zaal gegarandeerd plat!</p>
+                    <p data-i18n="bio-p4">Gewapend met een arsenaal aan eigen tracks en een niet te stoppen live-energie raast de band langs feesten, kroegen en festivals. Trek je <em>skankin' shoes</em> maar vast aan, want als SKIPPABEAT speelt, gaat de zaal gegarandeerd plat!</p>
                 </div>
 
                 <!-- Band Line-up Sidebar -->
                 <div class="bio-sidebar">
                     <div class="sidebar-card">
-                        <h3>Bandbezetting</h3>
-                        <p style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-muted);">Elfkoppige bezetting op het podium:</p>
+                        <h3 data-i18n="lineup-title">Bandbezetting</h3>
+                        <p style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-muted);" data-i18n="lineup-subtitle">Elfkoppige bezetting op het podium:</p>
                         <ul class="band-list">
-                            <li><span>Mariska Kerst</span> <span class="role">Zang</span></li>
-                            <li><span>Michael Benjaminsz</span> <span class="role">Zang / Hypeman</span></li>
-                            <li><span>Erik De Ridder</span> <span class="role">Gitaar</span></li>
-                            <li><span>Dirk Kleemans</span> <span class="role">Basgitaar</span></li>
-                            <li><span>Sander Martinet</span> <span class="role">Toetsen & Trompet</span></li>
-                            <li><span>Hans Albers</span> <span class="role">Drums</span></li>
-                            <li><span>Tim Schrijver</span> <span class="role">Percussie</span></li>
-                            <li><span>Renate de Jong</span> <span class="role">Sax</span></li>
-                            <li><span>Wouter van Bavel</span> <span class="role">Trombone</span></li>
-                            <li><span>Leo van Mook</span> <span class="role">Trompet</span></li>
-                            <li><span>Diederik Smits</span> <span class="role">Trompet</span></li>
+                            <li><span>Mariska Kerst</span> <span class="role" data-i18n="role-vocals">Zang</span></li>
+                            <li><span>Michael Benjaminsz</span> <span class="role" data-i18n="role-hypeman">Zang / Hypeman</span></li>
+                            <li><span>Erik De Ridder</span> <span class="role" data-i18n="role-guitar">Gitaar</span></li>
+                            <li><span>Dirk Kleemans</span> <span class="role" data-i18n="role-bass">Basgitaar</span></li>
+                            <li><span>Sander Martinet</span> <span class="role" data-i18n="role-keys-trumpet">Toetsen & Trompet</span></li>
+                            <li><span>Hans Albers</span> <span class="role" data-i18n="role-drums">Drums</span></li>
+                            <li><span>Tim Schrijver</span> <span class="role" data-i18n="role-percussion">Percussie</span></li>
+                            <li><span>Renate de Jong</span> <span class="role" data-i18n="role-sax">Sax</span></li>
+                            <li><span>Wouter van Bavel</span> <span class="role" data-i18n="role-trombone">Trombone</span></li>
+                            <li><span>Leo van Mook</span> <span class="role" data-i18n="role-trumpet">Trompet</span></li>
+                            <li><span>Diederik Smits</span> <span class="role" data-i18n="role-trumpet">Trompet</span></li>
                         </ul>
                     </div>
                 </div>
@@ -688,24 +740,24 @@
         <div class="two-column-grid">
             <!-- Discography -->
             <section id="disco" class="sidebar-card" style="margin-bottom: 0;">
-                <h3 style="font-size: 1.8rem; color: var(--accent-yellow);">Discografie</h3>
+                <h3 style="font-size: 1.8rem; color: var(--accent-yellow);" data-i18n="section-disco">Discografie</h3>
                 <ul class="disco-list" style="margin-top: 15px;">
                     <li><strong>EP To The Moon and Back</strong> (2018)</li>
                     <li><strong>EP Who Knows My Name</strong> (2021)</li>
-                    <li><strong>LP Skasjock #1</strong> (2021) — Verzamel-LP met o.a. SKIPPABEAT</li>
-                    <li><strong>Videoclip Who Knows My Name</strong> (2022)</li>
-                    <li><strong>2 Live video's</strong> (2025)</li>
-                    <li><strong style="color: var(--accent-yellow);">Nieuwe EP</strong> (Verwacht in 2026)</li>
+                    <li><strong data-i18n="disco-compilation">LP Skasjock #1 (2021) — Verzamel-LP met o.a. SKIPPABEAT</strong></li>
+                    <li><strong data-i18n="disco-video">Videoclip Who Knows My Name (2022)</strong></li>
+                    <li><strong data-i18n="disco-live">2 Live video's (2025)</strong></li>
+                    <li><strong style="color: var(--accent-yellow);" data-i18n="disco-new">Nieuwe EP (Verwacht in 2026)</strong></li>
                 </ul>
             </section>
 
             <!-- Highlights / Shows -->
             <section id="shows" class="sidebar-card" style="margin-bottom: 0;">
-                <h3 style="font-size: 1.8rem; color: var(--accent-yellow);">Podia & Festivals</h3>
+                <h3 style="font-size: 1.8rem; color: var(--accent-yellow);" data-i18n="section-shows">Podia & Festivals</h3>
                 <ul class="shows-list" style="margin-top: 15px;">
-                    <li><strong>Podia:</strong> Paradiso Amsterdam, Breda Mezz, Tilburg 013, Bibelot Dordrecht, Den Bosch W2, EM2 Groningen, So What Gouda.</li>
-                    <li><strong>Festivals:</strong> Breda Barst, Bevrijdingsfestival Breda, Palm Parkies, Et-Ska-Tera, De Kaaij, GoudSKAfestival, Offbeat festival, Breda Jazz Festival.</li>
-                    <li><strong>Gedeeld podium met:</strong> Bazzookas, Gallowstreet, The Toasters, Mark Foggo's Skasters, Muyayo Riff, My Baby, Ernst Jansz.</li>
+                    <li><strong data-i18n="shows-venues-title">Podia:</strong> Paradiso Amsterdam, Breda Mezz, Tilburg 013, Bibelot Dordrecht, Den Bosch W2, EM2 Groningen, So What Gouda.</li>
+                    <li><strong data-i18n="shows-festivals-title">Festivals:</strong> Breda Barst, Bevrijdingsfestival Breda, Palm Parkies, Et-Ska-Tera, De Kaaij, GoudSKAfestival, Offbeat festival, Breda Jazz Festival.</li>
+                    <li><strong data-i18n="shows-shared-title">Gedeeld podium met:</strong> Bazzookas, Gallowstreet, The Toasters, Mark Foggo's Skasters, Muyayo Riff, My Baby, Ernst Jansz.</li>
                 </ul>
             </section>
         </div>
@@ -720,10 +772,10 @@
         <!-- Contact Section -->
         <section id="contact">
             <div class="contact-box">
-                <h2>Boekingen & Contact</h2>
-                <p>Wil je SKIPPABEAT op jouw festival, podium of feest?</p>
+                <h2 data-i18n="contact-title">Boekingen & Contact</h2>
+                <p data-i18n="contact-text">Wil je SKIPPABEAT op jouw festival, podium of feest?</p>
                 <a href="mailto:skippabeatnl@gmail.com" class="btn-email">
-                    <i class="fas fa-envelope"></i> Mail skippabeatnl@gmail.com
+                    <i class="fas fa-envelope"></i> <span data-i18n="contact-btn">Mail skippabeatnl@gmail.com</span>
                 </a>
             </div>
         </section>
@@ -736,11 +788,12 @@
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 SKIPPABEAT. All rights reserved.</p>
-        <p style="font-size: 0.85rem; margin-top: 5px;">Rocksteady Reggae Punk Whatever Ska uit Breda</p>
+        <p style="font-size: 0.85rem; margin-top: 5px;" data-i18n="footer-tagline">Rocksteady Reggae Punk Whatever Ska uit Breda</p>
     </footer>
 
-    <!-- Mobile Menu Script -->
+    <!-- Scripts -->
     <script>
+        // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -753,6 +806,118 @@
                 navLinks.classList.remove('active');
             });
         });
+
+        // Language Translation Data
+        const translations = {
+            nl: {
+                "nav-home": "Home",
+                "nav-video": "Video",
+                "nav-agenda": "Agenda",
+                "nav-about": "Over de Band",
+                "nav-disco": "Discografie",
+                "nav-shows": "Historie",
+                "nav-contact": "Contact",
+                "socials-title": "Volg, Beluister & Shop",
+                "section-video": "Video",
+                "section-agenda": "Live Agenda",
+                "month-oct": "OKT 2026",
+                "btn-tickets": "Tickets & Info",
+                "agenda-footer": 'Blijf op de hoogte van nieuwe showbekendmakingen via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> en onze socials!',
+                "about-title-prefix": "Over",
+                "bio-p1": "De Bredase skaband <strong>SKIPPABEAT</strong> is uitgegroeid tot een vaste waarde in Breda en ver daarbuiten. Met hun topmuzikanten brengt SKIPPABEAT een energieke en veelzijdige ska-show die iedereen laat bewegen!",
+                "quote-text": '"Ska met een hoofdletter, punk met een knipoog, aanstekelijk als een malle."',
+                "bio-p2": "Al 12 jaar lang zet SKIPPABEAT elk podium op zijn kop met opzwepende ska-shows! Ontstaan uit de as van Manoman, is deze Bredase bende uitgegroeid tot een geoliede, Engelstalige ska-machine die stuiterendinge ska, rauwe punk en vette reggae in hoog tempo op je afstuurt.",
+                "bio-p3": "Krachtige vocalen, explosieve MC gecombineerd met dikke samples, een pompende ritmesectie en vette blazerspartijen vormen samen de brandstof voor een energieke live-experience. Stilvallen is er niet bij; elk optreden wordt neergezet als een uitbundig feestje.",
+                "bio-p4": "Gewapend met een arsenaal aan eigen tracks en een niet te stoppen live-energie raast de band langs feesten, kroegen en festivals. Trek je <em>skankin' shoes</em> maar vast aan, want als SKIPPABEAT speelt, gaat de zaal gegarandeerd plat!",
+                "lineup-title": "Bandbezetting",
+                "lineup-subtitle": "Elfkoppige bezetting op het podium:",
+                "role-vocals": "Zang",
+                "role-hypeman": "Zang / Hypeman",
+                "role-guitar": "Gitaar",
+                "role-bass": "Basgitaar",
+                "role-keys-trumpet": "Toetsen & Trompet",
+                "role-drums": "Drums",
+                "role-percussion": "Percussie",
+                "role-sax": "Sax",
+                "role-trombone": "Trombone",
+                "role-trumpet": "Trompet",
+                "section-disco": "Discografie",
+                "disco-compilation": "LP Skasjock #1 (2021) — Verzamel-LP met o.a. SKIPPABEAT",
+                "disco-video": "Videoclip Who Knows My Name (2022)",
+                "disco-live": "2 Live video's (2025)",
+                "disco-new": "Nieuwe EP (Verwacht in 2026)",
+                "section-shows": "Podia & Festivals",
+                "shows-venues-title": "Podia:",
+                "shows-festivals-title": "Festivals:",
+                "shows-shared-title": "Gedeeld podium met:",
+                "contact-title": "Boekingen & Contact",
+                "contact-text": "Wil je SKIPPABEAT op jouw festival, podium of feest?",
+                "contact-btn": "Mail skippabeatnl@gmail.com",
+                "footer-tagline": "Rocksteady Reggae Punk Whatever Ska uit Breda"
+            },
+            en: {
+                "nav-home": "Home",
+                "nav-video": "Video",
+                "nav-agenda": "Tour Dates",
+                "nav-about": "About the Band",
+                "nav-disco": "Discography",
+                "nav-shows": "History",
+                "nav-contact": "Contact",
+                "socials-title": "Follow, Listen & Shop",
+                "section-video": "Video",
+                "section-agenda": "Live Agenda",
+                "month-oct": "OCT 2026",
+                "btn-tickets": "Tickets & Info",
+                "agenda-footer": 'Stay updated on new show announcements via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> and our socials!',
+                "about-title-prefix": "About",
+                "bio-p1": "Ska band <strong>SKIPPABEAT</strong> from Breda (NL) has grown into a established household name in Breda and far beyond. With top musicians, SKIPPABEAT delivers an energetic and versatile ska show that gets everyone moving!",
+                "quote-text": '"Ska with a capital S, punk with a wink, infectious as hell."',
+                "bio-p2": "For 12 years, SKIPPABEAT has been turning every stage upside down with high-energy ska shows! Born from the ashes of Manoman, this gang from Breda has grown into a well-oiled ska machine delivering bouncy ska, raw punk, and heavy reggae at high speed.",
+                "bio-p3": "Powerful vocals, an explosive MC combined with fat samples, a pumping rhythm section, and tight brass parts form the fuel for an energetic live experience. There is no standing still; every gig turns into a full-blown party.",
+                "bio-p4": "Armed with an arsenal of original tracks and unstoppable live energy, the band blasts through festivals, venues, and pubs. Put on your <em>skankin' shoes</em>, because when SKIPPABEAT plays, the place is guaranteed to go wild!",
+                "lineup-title": "Band Line-Up",
+                "lineup-subtitle": "Eleven-piece lineup on stage:",
+                "role-vocals": "Vocals",
+                "role-hypeman": "Vocals / Hypeman",
+                "role-guitar": "Guitar",
+                "role-bass": "Bass Guitar",
+                "role-keys-trumpet": "Keys & Trumpet",
+                "role-drums": "Drums",
+                "role-percussion": "Percussion",
+                "role-sax": "Saxophone",
+                "role-trombone": "Trombone",
+                "role-trumpet": "Trumpet",
+                "section-disco": "Discography",
+                "disco-compilation": "LP Skasjock #1 (2021) — Compilation LP ft. SKIPPABEAT",
+                "disco-video": "Music Video Who Knows My Name (2022)",
+                "disco-live": "2 Live videos (2025)",
+                "disco-new": "New EP (Expected 2026)",
+                "section-shows": "Venues & Festivals",
+                "shows-venues-title": "Venues:",
+                "shows-festivals-title": "Festivals:",
+                "shows-shared-title": "Shared the stage with:",
+                "contact-title": "Booking & Contact",
+                "contact-text": "Want SKIPPABEAT at your festival, venue, or party?",
+                "contact-btn": "Mail skippabeatnl@gmail.com",
+                "footer-tagline": "Rocksteady Reggae Punk Whatever Ska from Breda"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            
+            // Toggle active state on flag buttons
+            document.getElementById('btn-nl').classList.toggle('active', lang === 'nl');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            // Replace all text elements with translated strings
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+        }
     </script>
 </body>
 </html>
