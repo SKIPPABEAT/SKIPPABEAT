@@ -270,7 +270,7 @@
             position: relative;
             width: 100%;
             height: 0;
-            padding-bottom: 75%; /* Zorgt voor een mooie verhouding naast de slider */
+            padding-bottom: 75%;
             overflow: hidden;
             border-radius: 8px;
             border: 3px solid var(--border-gray);
@@ -292,7 +292,7 @@
             position: relative;
             width: 100%;
             height: 0;
-            padding-bottom: 75%; /* Zelfde verhouding als de video */
+            padding-bottom: 75%;
             overflow: hidden;
             border-radius: 8px;
             border: 3px solid var(--border-gray);
@@ -758,7 +758,7 @@
             }
 
             .video-container, .photo-slider {
-                padding-bottom: 56.25%; /* Standaard 16:9 verhouding op mobiel */
+                padding-bottom: 56.25%;
             }
 
             .news-card {
@@ -836,9 +836,9 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" data-i18n="nav-home">Home</a></li>
                 <li><a href="#media" data-i18n="nav-media">Media</a></li>
+                <li><a href="#agenda" data-i18n="nav-agenda">Agenda</a></li>
                 <li><a href="#music" data-i18n="nav-music">Muziek</a></li>
                 <li><a href="#news" data-i18n="nav-news">Nieuws</a></li>
-                <li><a href="#agenda" data-i18n="nav-agenda">Agenda</a></li>
                 <li><a href="#about" data-i18n="nav-about">Over de Band</a></li>
                 <li><a href="#disco" data-i18n="nav-disco">Discografie</a></li>
                 <li><a href="#shows" data-i18n="nav-shows">Historie</a></li>
@@ -910,6 +910,29 @@
             </div>
         </section>
 
+        <!-- Live Agenda / Tour Section (Nu direct onder Video & Foto's) -->
+        <section id="agenda">
+            <h2 class="section-title" data-i18n="section-agenda">Live Agenda</h2>
+            <div class="agenda-list">
+                <div class="agenda-item">
+                    <div class="agenda-date">
+                        <span class="day">10</span>
+                        <span class="month" data-i18n="month-oct">OKT 2026</span>
+                    </div>
+                    <div class="agenda-details">
+                        <h3>GoudSKAfestival</h3>
+                        <p><i class="fas fa-map-marker-alt" style="color: var(--accent-red);"></i> Gouda, NL — Studio Gonz</p>
+                    </div>
+                    <div class="agenda-action">
+                        <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" class="btn-ticket" data-i18n="btn-tickets">Tickets & Info</a>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; font-size: 0.95rem; color: var(--text-muted);" data-i18n="agenda-footer">
+                Blijf op de hoogte van nieuwe showbekendmakingen via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> en onze socials!
+            </p>
+        </section>
+
         <!-- Spotify Player Section -->
         <section id="music">
             <h2 class="section-title" data-i18n="section-music">Beluister op Spotify</h2>
@@ -931,7 +954,7 @@
                         <div>
                             <div class="news-date" data-i18n="news-1-date">September 2026</div>
                             <h3 data-i18n="news-1-title">Wat een avond! Afscheid Marco & Mark</h3>
-                            <p data-i18n="news-1-text">Op 30 augustus speelden we het laatste optreden met Marco en Mark in Café Parkzicht, Breda. De zaal was tot de nok gevuld, de sfeer intens, het feest groots. Samen met jullie hebben we hun jarenlange inzet, energie en muzikaliteit gevierd. Dank aan iedereen die deze bijzondere avond heeft gedeeld! En in het bijzonder BEDANKT MARK & MARCO!</p>
+                            <p data-i18n="news-1-text">Op 30 augustus speelden we het laatste optreden met Marco en Mark in Café Parkzicht, Breda. De zaal was tot de nok gevuld, de sfeer intens, het feest groots. Samen met jullie hebben we hun jarenlange inzet, energie en muzikaliteit gevierd. Dank aan iedereen die deze bijzondere avond heeft gedeeld! En in het bijzonder Marco en Mark!</p>
                         </div>
                     </div>
                     <!-- Bericht 2: Augustus 2026 -->
@@ -952,29 +975,6 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Live Agenda / Tour Section -->
-        <section id="agenda">
-            <h2 class="section-title" data-i18n="section-agenda">Live Agenda</h2>
-            <div class="agenda-list">
-                <div class="agenda-item">
-                    <div class="agenda-date">
-                        <span class="day">10</span>
-                        <span class="month" data-i18n="month-oct">OKT 2026</span>
-                    </div>
-                    <div class="agenda-details">
-                        <h3>GoudSKAfestival</h3>
-                        <p><i class="fas fa-map-marker-alt" style="color: var(--accent-red);"></i> Gouda, NL — Studio Gonz</p>
-                    </div>
-                    <div class="agenda-action">
-                        <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" class="btn-ticket" data-i18n="btn-tickets">Tickets & Info</a>
-                    </div>
-                </div>
-            </div>
-            <p style="text-align: center; margin-top: 20px; font-size: 0.95rem; color: var(--text-muted);" data-i18n="agenda-footer">
-                Blijf op de hoogte van nieuwe showbekendmakingen via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> en onze socials!
-            </p>
         </section>
 
         <!-- Band Bio & Line-up -->
@@ -1096,7 +1096,6 @@
         const sliderDots = document.getElementById('sliderDots');
         let autoSlideTimer;
 
-        // Generate Dots
         slides.forEach((_, index) => {
             const dot = document.createElement('div');
             dot.classList.add('dot');
@@ -1130,7 +1129,7 @@
             autoSlideTimer = setInterval(() => {
                 currentSlide = (currentSlide + 1) % slides.length;
                 updateSlider();
-            }, 4000); // Wisselt elke 4 seconden
+            }, 4000);
         }
 
         function resetAutoSlide() {
@@ -1145,9 +1144,9 @@
             nl: {
                 "nav-home": "Home",
                 "nav-media": "Media",
+                "nav-agenda": "Agenda",
                 "nav-music": "Muziek",
                 "nav-news": "Nieuws",
-                "nav-agenda": "Agenda",
                 "nav-about": "Over de Band",
                 "nav-disco": "Discografie",
                 "nav-shows": "Historie",
@@ -1205,9 +1204,9 @@
             en: {
                 "nav-home": "Home",
                 "nav-media": "Media",
+                "nav-agenda": "Tour Dates",
                 "nav-music": "Music",
                 "nav-news": "News",
-                "nav-agenda": "Tour Dates",
                 "nav-about": "About the Band",
                 "nav-disco": "Discography",
                 "nav-shows": "History",
@@ -1265,9 +1264,9 @@
             fr: {
                 "nav-home": "Accueil",
                 "nav-media": "Média",
+                "nav-agenda": "Concerts",
                 "nav-music": "Musique",
                 "nav-news": "Actualités",
-                "nav-agenda": "Concerts",
                 "nav-about": "Le Groupe",
                 "nav-disco": "Discographie",
                 "nav-shows": "Historique",
@@ -1325,9 +1324,9 @@
             de: {
                 "nav-home": "Startseite",
                 "nav-media": "Medien",
+                "nav-agenda": "Termine",
                 "nav-music": "Musik",
                 "nav-news": "Neuigkeiten",
-                "nav-agenda": "Termine",
                 "nav-about": "Über die Band",
                 "nav-disco": "Diskografie",
                 "nav-shows": "Historie",
@@ -1355,7 +1354,7 @@
                 "quote-text": '"Ska mit einem großen S, Punk mit einem Augenzwinkern, ansteckend wie verrückt."',
                 "bio-p2": "Seit 12 Jahren stellt SKIPPABEAT jede Bühne mit mitreißenden Ska-Shows auf den Kopf! Aus der Asche von Manoman entstanden, hat sich die Truppe zu einer gut geölten Ska-Maschine entwickelt, die mitreißenden Ska, rauem Punk und satten Reggae im Eiltempo abliefert.",
                 "bio-p3": "Kraftvoller Gesang, ein explosiver MC kombiniert mit dicken Samples, eine pumpende Rhythmusgruppe und fett geblasene Bläsersätze sind der Treibstoff für ein energetisches Live-Erlebnis. Stillstehen gibt es nicht; jeder Auftritt wird zu einer ausgelassenen Party.",
-                "bio-p4": "Bewaffnet mit eigenen Tracks und unaufhaltsamer Live-Energie tourt die Band durch Festivals, Clubs und Kneipen. Zieh deine Tanzschuhe an, denn wenn SKIPPABEAT spielt, bebt der Saal!",
+                "bio-p4": "Bewaffnet mit eigenen Tracks und unaufhaltsamer Live-Energie tourt die Band durch Festivals, Clubs und Kneipen. Zieh deine Tanzschuhe an, denn wenn SKIPPABEAT speelt, bebt der Saal!",
                 "lineup-title": "Bandbesetzung",
                 "lineup-subtitle": "Elfköpfige Besetzung auf der Bühne:",
                 "role-vocals": "Gesang",
