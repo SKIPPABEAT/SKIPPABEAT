@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKIPPABEAT - Rocksteady Reggae Punk Whatever Ska</title>
-    <!-- Font Awesome voor Social Media Icons & Vlaggen -->
+    <!-- Font Awesome voor Social Media Icons, Vlaggen & Slider Pijlen -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts voor Ska / Punk Sfeer -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -257,15 +257,25 @@
         .social-card.songkick:hover i { color: #f80046; }
         .social-card.merch:hover i { color: #e63946; }
 
+        /* Media Grid Layout: Video + Photo Slider side-by-side */
+        .media-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: stretch;
+        }
+
         /* Embedded YouTube Video */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%;
+            width: 100%;
             height: 0;
+            padding-bottom: 75%; /* Zorgt voor een mooie verhouding naast de slider */
             overflow: hidden;
             border-radius: 8px;
             border: 3px solid var(--border-gray);
             box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+            background-color: #000;
         }
 
         .video-container iframe {
@@ -275,6 +285,94 @@
             width: 100%;
             height: 100%;
             border: 0;
+        }
+
+        /* Photo Slider Styling */
+        .photo-slider {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%; /* Zelfde verhouding als de video */
+            overflow: hidden;
+            border-radius: 8px;
+            border: 3px solid var(--border-gray);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+            background-color: #000;
+        }
+
+        .slider-slides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Slider Controls */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--accent-yellow);
+            border: 1px solid var(--border-gray);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 10;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .slider-btn:hover {
+            background: var(--accent-yellow);
+            color: #000;
+        }
+
+        .slider-btn.prev { left: 10px; }
+        .slider-btn.next { right: 10px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: var(--accent-yellow);
+            transform: scale(1.2);
         }
 
         /* Spotify Player Styling */
@@ -655,6 +753,14 @@
                 display: flex;
             }
 
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-container, .photo-slider {
+                padding-bottom: 56.25%; /* Standaard 16:9 verhouding op mobiel */
+            }
+
             .news-card {
                 flex: 0 0 85%;
             }
@@ -729,7 +835,7 @@
             </button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" data-i18n="nav-home">Home</a></li>
-                <li><a href="#video" data-i18n="nav-video">Video</a></li>
+                <li><a href="#media" data-i18n="nav-media">Media</a></li>
                 <li><a href="#music" data-i18n="nav-music">Muziek</a></li>
                 <li><a href="#news" data-i18n="nav-news">Nieuws</a></li>
                 <li><a href="#agenda" data-i18n="nav-agenda">Agenda</a></li>
@@ -776,11 +882,31 @@
             </div>
         </section>
 
-        <!-- Featured YouTube Video -->
-        <section id="video">
-            <h2 class="section-title" data-i18n="section-video">Video</h2>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/Vga_2ITu6IU" title="SKIPPABEAT - Promo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- Media Section: YouTube Video & Photo Slider Side-by-Side -->
+        <section id="media">
+            <h2 class="section-title" data-i18n="section-media">Video & Foto's</h2>
+            <div class="media-grid">
+                <!-- Video Left -->
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Vga_2ITu6IU" title="SKIPPABEAT - Promo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <!-- Photo Slider Right -->
+                <div class="photo-slider" id="photoSlider">
+                    <div class="slider-slides" id="sliderSlides">
+                        <div class="slide"><img src="skip1.jpg" alt="Skippabeat Foto 1"></div>
+                        <div class="slide"><img src="skip2.JPG" alt="Skippabeat Foto 2"></div>
+                        <div class="slide"><img src="skip3.JPG" alt="Skippabeat Foto 3"></div>
+                        <div class="slide"><img src="skip4.JPG" alt="Skippabeat Foto 4"></div>
+                        <div class="slide"><img src="skip5.JPG" alt="Skippabeat Foto 5"></div>
+                        <div class="slide"><img src="skip6.JPG" alt="Skippabeat Foto 6"></div>
+                        <div class="slide"><img src="skip7.JPG" alt="Skippabeat Foto 7"></div>
+                        <div class="slide"><img src="skip8.jpg" alt="Skippabeat Foto 8"></div>
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide(-1)" aria-label="Vorige foto"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn next" onclick="moveSlide(1)" aria-label="Volgende foto"><i class="fas fa-chevron-right"></i></button>
+                    <div class="slider-dots" id="sliderDots"></div>
+                </div>
             </div>
         </section>
 
@@ -963,11 +1089,62 @@
             });
         });
 
+        // Photo Slider Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const sliderSlides = document.getElementById('sliderSlides');
+        const sliderDots = document.getElementById('sliderDots');
+        let autoSlideTimer;
+
+        // Generate Dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            sliderDots.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlider() {
+            sliderSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            updateSlider();
+            resetAutoSlide();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideTimer = setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlider();
+            }, 4000); // Wisselt elke 4 seconden
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideTimer);
+            startAutoSlide();
+        }
+
+        startAutoSlide();
+
         // Translations Dictionary
         const translations = {
             nl: {
                 "nav-home": "Home",
-                "nav-video": "Video",
+                "nav-media": "Media",
                 "nav-music": "Muziek",
                 "nav-news": "Nieuws",
                 "nav-agenda": "Agenda",
@@ -976,7 +1153,7 @@
                 "nav-shows": "Historie",
                 "nav-contact": "Contact",
                 "socials-title": "Volg, Beluister & Shop",
-                "section-video": "Video",
+                "section-media": "Video & Foto's",
                 "section-music": "Beluister op Spotify",
                 "section-news": "Nieuws & Updates",
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Swipe voor oudere berichten',
@@ -1027,7 +1204,7 @@
             },
             en: {
                 "nav-home": "Home",
-                "nav-video": "Video",
+                "nav-media": "Media",
                 "nav-music": "Music",
                 "nav-news": "News",
                 "nav-agenda": "Tour Dates",
@@ -1036,7 +1213,7 @@
                 "nav-shows": "History",
                 "nav-contact": "Contact",
                 "socials-title": "Follow, Listen & Shop",
-                "section-video": "Video",
+                "section-media": "Video & Photos",
                 "section-music": "Listen on Spotify",
                 "section-news": "News & Updates",
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Swipe for older posts',
@@ -1087,7 +1264,7 @@
             },
             fr: {
                 "nav-home": "Accueil",
-                "nav-video": "Vidéo",
+                "nav-media": "Média",
                 "nav-music": "Musique",
                 "nav-news": "Actualités",
                 "nav-agenda": "Concerts",
@@ -1096,7 +1273,7 @@
                 "nav-shows": "Historique",
                 "nav-contact": "Contact",
                 "socials-title": "Suivez, Écoutez & Achetez",
-                "section-video": "Vidéo",
+                "section-media": "Vidéo & Photos",
                 "section-music": "Écoutez sur Spotify",
                 "section-news": "Actualités & Mises à jour",
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Glissez pour les anciens messages',
@@ -1147,7 +1324,7 @@
             },
             de: {
                 "nav-home": "Startseite",
-                "nav-video": "Video",
+                "nav-media": "Medien",
                 "nav-music": "Musik",
                 "nav-news": "Neuigkeiten",
                 "nav-agenda": "Termine",
@@ -1156,7 +1333,7 @@
                 "nav-shows": "Historie",
                 "nav-contact": "Kontakt",
                 "socials-title": "Folgen, Hören & Shoppen",
-                "section-video": "Video",
+                "section-media": "Video & Fotos",
                 "section-music": "Auf Spotify hören",
                 "section-news": "Neuigkeiten & Updates",
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Wischen für ältere Beiträge',
