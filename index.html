@@ -636,6 +636,16 @@
             color: #000;
         }
 
+        .no-shows-msg {
+            text-align: center;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 20px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-gray);
+        }
+
         .merch-image-section {
             text-align: center;
             margin-top: 50px;
@@ -945,12 +955,12 @@
             </div>
         </section>
 
-        <!-- Live Agenda / Tour Section -->
+        <!-- Live Agenda / Tour Section (Dynamisch met automatische datumfiltering) -->
         <section id="agenda">
             <h2 class="section-title" data-i18n="section-agenda">Live Agenda</h2>
-            <div class="agenda-list">
+            <div class="agenda-list" id="agendaList">
                 <!-- Show 1: 10 Okt 2026 -->
-                <div class="agenda-item">
+                <div class="agenda-item" data-date="2026-10-10">
                     <div class="agenda-date">
                         <span class="day">10</span>
                         <span class="month" data-i18n="month-oct">OKT 2026</span>
@@ -964,15 +974,15 @@
                     </div>
                 </div>
 
-                <!-- Show 2: 13 Nov 2026 (Nieuw) -->
-                <div class="agenda-item">
+                <!-- Show 2: 13 Nov 2026 -->
+                <div class="agenda-item" data-date="2026-11-13">
                     <div class="agenda-date">
                         <span class="day">13</span>
                         <span class="month" data-i18n="month-nov">NOV 2026</span>
                     </div>
                     <div class="agenda-details">
                         <h3>SKIPPABEAT + Skankin' Rebels</h3>
-                        <p><i class="fas fa-map-marker-alt" style="color: var(--accent-red);"></i> Breda, NL — Café Crafft</p>
+                        <p><i class="fas fa-map-marker-alt" style="color: var(--accent-red);"></i> Breda, NL — Crafft</p>
                         <p style="font-size: 0.85rem; color: var(--accent-yellow); margin-top: 2px;">
                             <i class="far fa-clock"></i> Aanvang 21:00 | Support: Skankin' Rebels
                         </p>
@@ -982,6 +992,7 @@
                     </div>
                 </div>
             </div>
+            
             <p style="text-align: center; margin-top: 20px; font-size: 0.95rem; color: var(--text-muted);" data-i18n="agenda-footer">
                 Blijf op de hoogte van nieuwe showbekendmakingen via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> en onze socials!
             </p>
@@ -1134,6 +1145,38 @@
 
     <!-- Scripts -->
     <script>
+        // Automatic Past Shows Filter (Verwijdert voorbije shows automatisch van de site)
+        function filterPastShows() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Vergelijk puur op datum
+
+            const agendaList = document.getElementById('agendaList');
+            const showItems = agendaList.querySelectorAll('.agenda-item');
+            let visibleShowsCount = 0;
+
+            showItems.forEach(item => {
+                const showDateStr = item.getAttribute('data-date');
+                if (showDateStr) {
+                    const showDate = new Date(showDateStr + 'T23:59:59'); // Geldig tot einde van de dag
+                    if (showDate < today) {
+                        item.remove(); // Verwijder voorbije show uit de DOM
+                    } else {
+                        visibleShowsCount++;
+                    }
+                }
+            });
+
+            // Toon een nette melding als er geen toekomstige shows in de agenda staan
+            if (visibleShowsCount === 0) {
+                const currentLang = document.documentElement.lang || 'nl';
+                const msgText = translations[currentLang] ? translations[currentLang]['no-shows-msg'] : 'Binnenkort meer nieuwe optredens bekend!';
+                agendaList.innerHTML = `<div class="no-shows-msg" data-i18n="no-shows-msg">${msgText}</div>`;
+            }
+        }
+
+        // Run direct bij het laden
+        filterPastShows();
+
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
@@ -1229,6 +1272,7 @@
                 "month-nov": "NOV 2026",
                 "btn-tickets": "Tickets & Info",
                 "btn-free-info": "Gratis Entree & Info",
+                "no-shows-msg": "Binnenkort meer nieuwe optredens bekend!",
                 "agenda-footer": 'Blijf op de hoogte van nieuwe showbekendmakingen via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> en onze socials!',
                 "about-title-prefix": "Over",
                 "bio-p1": "De Bredase skaband <strong>SKIPPABEAT</strong> is uitgegroeid tot een vaste waarde in Breda en ver daarbuiten. Met hun topmuzikanten brengt SKIPPABEAT een energieke en veelzijdige ska-show die iedereen laat bewegen!",
@@ -1291,6 +1335,7 @@
                 "month-nov": "NOV 2026",
                 "btn-tickets": "Tickets & Info",
                 "btn-free-info": "Free Entry & Info",
+                "no-shows-msg": "More shows announced soon!",
                 "agenda-footer": 'Stay updated on new show announcements via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> and our socials!',
                 "about-title-prefix": "About",
                 "bio-p1": "Ska band <strong>SKIPPABEAT</strong> from Breda (NL) has grown into an established household name in Breda and far beyond. With top musicians, SKIPPABEAT delivers an energetic and versatile ska show that gets everyone moving!",
@@ -1353,6 +1398,7 @@
                 "month-nov": "NOV 2026",
                 "btn-tickets": "Billets & Info",
                 "btn-free-info": "Entrée gratuite & Info",
+                "no-shows-msg": "Nouveaux concerts bientôt annoncés !",
                 "agenda-footer": 'Restez informés des nouveaux concerts via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> et nos réseaux sociaux !',
                 "about-title-prefix": "À propos de",
                 "bio-p1": "Le groupe de ska <strong>SKIPPABEAT</strong> (Breda, Pays-Bas) est devenu une référence incontournable. Avec des musiciens de premier ordre, SKIPPABEAT offre un spectacle ska dynamique et varié qui fait bouger tout le monde !",
@@ -1415,6 +1461,7 @@
                 "month-nov": "NOV 2026",
                 "btn-tickets": "Tickets & Info",
                 "btn-free-info": "Eintritt frei & Info",
+                "no-shows-msg": "Weitere Show-Ankündigungen in Kürze!",
                 "agenda-footer": 'Bleiben Sie über neue Show-Ankündigungen auf <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> und unseren Socials informiert!',
                 "about-title-prefix": "Über",
                 "bio-p1": "Die Ska-Band <strong>SKIPPABEAT</strong> aus Breda (Niederlande) ist zu einer festen Größe geworden. Mit ihren erstklassigen Musikern liefert SKIPPABEAT eine energiegeladene Ska-Show, die jeden zum Tanzen bringt!",
