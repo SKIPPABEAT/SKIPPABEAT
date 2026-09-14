@@ -134,6 +134,7 @@
             display: flex;
             list-style: none;
             gap: 20px;
+            align-items: center;
         }
 
         .nav-links a {
@@ -149,6 +150,34 @@
             color: var(--accent-yellow);
         }
 
+        /* Footer Login Button */
+        .bottom-login-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .nav-login-btn {
+            background: transparent;
+            border: 1px solid var(--accent-yellow);
+            color: var(--accent-yellow);
+            padding: 8px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-login-btn:hover {
+            background-color: var(--accent-yellow);
+            color: #000;
+        }
+
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -156,6 +185,132 @@
             color: var(--text-white);
             font-size: 1.5rem;
             cursor: pointer;
+        }
+
+        /* Modal / Popup Styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background-color: var(--bg-card);
+            border: 2px solid var(--accent-yellow);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-red);
+        }
+
+        .modal-title {
+            font-family: 'Permanent Marker', cursive;
+            color: var(--accent-yellow);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border-gray);
+            padding-bottom: 10px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px;
+            background-color: #000;
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            color: var(--text-white);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .login-input:focus {
+            border-color: var(--accent-yellow);
+        }
+
+        .login-btn-submit {
+            background-color: var(--accent-yellow);
+            color: #000;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.2s;
+        }
+
+        .login-btn-submit:hover {
+            background-color: #e6b800;
+        }
+
+        .error-msg {
+            color: var(--accent-red);
+            font-size: 0.9rem;
+            display: none;
+            font-weight: bold;
+        }
+
+        .optional-dates-list {
+            list-style: none;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .optional-date-item {
+            background-color: #000;
+            border-left: 4px solid var(--accent-yellow);
+            padding: 12px 15px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .optional-date-item strong {
+            color: var(--accent-yellow);
+            display: block;
+            font-size: 1.05rem;
+        }
+
+        .optional-date-item span {
+            color: var(--text-white);
+            font-size: 0.95rem;
         }
 
         /* Banner Header */
@@ -892,6 +1047,46 @@
         </div>
     </nav>
 
+    <!-- Modal Popup voor Inloggen & Optionele Speeldata -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+            
+            <!-- Inlog formulier scherm -->
+            <div id="loginSection">
+                <h3 class="modal-title"><i class="fas fa-lock"></i> Band Inlog</h3>
+                <p style="margin-bottom: 15px; color: var(--text-muted); font-size: 0.95rem; font-weight: bold;">
+                    Members only
+                </p>
+                <form class="login-form" onsubmit="handleLogin(event)">
+                    <input type="password" id="passwordInput" class="login-input" placeholder="Wachtwoord..." required>
+                    <p class="error-msg" id="errorMsg">Onjuist wachtwoord! Probeer opnieuw.</p>
+                    <button type="submit" class="login-btn-submit">Bekijken</button>
+                </form>
+            </div>
+
+            <!-- Resultaat scherm (optionele speeldata) -->
+            <div id="datesSection" style="display: none;">
+                <h3 class="modal-title"><i class="fas fa-calendar-alt"></i> Optionele Speeldata</h3>
+                <ul class="optional-dates-list">
+                    <li class="optional-date-item">
+                        <strong>Za 13 feb</strong>
+                        <span>De Pit, Terneuzen</span>
+                        <div><small style="color: var(--text-muted);">(support Smoorverliefd)</small></div>
+                    </li>
+                    <li class="optional-date-item">
+                        <strong>Za 15 mei</strong>
+                        <span>Rock on the Kiosk, Phillipine</span>
+                    </li>
+                    <li class="optional-date-item">
+                        <strong>Zo 16 mei</strong>
+                        <span>Skatinee Festival Kalmthout</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Banner Image -->
     <div class="banner-container" id="home">
         <img src="skippabeatbanner.jpg" alt="SKIPPABEAT Banner Logo" class="banner-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/4279x873/000000/ffcc00?text=*+SKIPPABEAT+*';">
@@ -1132,6 +1327,13 @@
             </div>
         </section>
 
+        <!-- Inlogknop helemaal onderaan onder Contact -->
+        <div class="bottom-login-container">
+            <button class="nav-login-btn" onclick="openLoginModal()" title="Inloggen voor optionele data">
+                <i class="fas fa-lock"></i> Inlog Band
+            </button>
+        </div>
+
     </div>
 
     <!-- Ska Checkerboard Divider -->
@@ -1145,10 +1347,10 @@
 
     <!-- Scripts -->
     <script>
-        // Automatic Past Shows Filter (Verwijdert voorbije shows automatisch van de site)
+        // Automatic Past Shows Filter
         function filterPastShows() {
             const today = new Date();
-            today.setHours(0, 0, 0, 0); // Vergelijk puur op datum
+            today.setHours(0, 0, 0, 0);
 
             const agendaList = document.getElementById('agendaList');
             const showItems = agendaList.querySelectorAll('.agenda-item');
@@ -1157,16 +1359,15 @@
             showItems.forEach(item => {
                 const showDateStr = item.getAttribute('data-date');
                 if (showDateStr) {
-                    const showDate = new Date(showDateStr + 'T23:59:59'); // Geldig tot einde van de dag
+                    const showDate = new Date(showDateStr + 'T23:59:59');
                     if (showDate < today) {
-                        item.remove(); // Verwijder voorbije show uit de DOM
+                        item.remove();
                     } else {
                         visibleShowsCount++;
                     }
                 }
             });
 
-            // Toon een nette melding als er geen toekomstige shows in de agenda staan
             if (visibleShowsCount === 0) {
                 const currentLang = document.documentElement.lang || 'nl';
                 const msgText = translations[currentLang] ? translations[currentLang]['no-shows-msg'] : 'Binnenkort meer nieuwe optredens bekend!';
@@ -1174,8 +1375,39 @@
             }
         }
 
-        // Run direct bij het laden
         filterPastShows();
+
+        // Modal / Inlog Logica
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('datesSection').style.display = 'none';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('errorMsg').style.display = 'none';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const inputVal = document.getElementById('passwordInput').value;
+            if (inputVal === 'Manoman01!') {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('datesSection').style.display = 'block';
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        }
+
+        // Sluit modal bij klikken op achtergrond
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('loginModal');
+            if (e.target === modal) {
+                closeLoginModal();
+            }
+        });
 
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
