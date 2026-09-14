@@ -263,6 +263,23 @@
             border-color: var(--accent-yellow);
         }
 
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .remember-me input {
+            accent-color: var(--accent-yellow);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
         .login-btn-submit {
             background-color: var(--accent-yellow);
             color: #000;
@@ -278,6 +295,24 @@
 
         .login-btn-submit:hover {
             background-color: #e6b800;
+        }
+
+        .btn-logout {
+            background-color: transparent;
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .btn-logout:hover {
+            background-color: var(--accent-red);
+            color: #fff;
         }
 
         .error-msg {
@@ -1060,6 +1095,12 @@
                 </p>
                 <form class="login-form" onsubmit="handleLogin(event)">
                     <input type="password" id="passwordInput" class="login-input" placeholder="Wachtwoord..." required>
+                    
+                    <!-- Onthoud mij vinkje -->
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe"> Onthoud mij op dit apparaat
+                    </label>
+
                     <p class="error-msg" id="errorMsg">Onjuist wachtwoord! Probeer opnieuw.</p>
                     <button type="submit" class="login-btn-submit">Bekijken</button>
                 </form>
@@ -1083,6 +1124,7 @@
                         <span>Skatinee Festival Kalmthout</span>
                     </li>
                 </ul>
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Uitloggen</button>
             </div>
         </div>
     </div>
@@ -1377,13 +1419,23 @@
 
         filterPastShows();
 
-        // Modal / Inlog Logica
+        // Modal / Inlog Logica met Persistentie (localStorage)
+        function checkPersistentLogin() {
+            return localStorage.getItem('skippa_band_logged_in') === 'true';
+        }
+
         function openLoginModal() {
             document.getElementById('loginModal').classList.add('active');
-            document.getElementById('loginSection').style.display = 'block';
-            document.getElementById('datesSection').style.display = 'none';
-            document.getElementById('passwordInput').value = '';
-            document.getElementById('errorMsg').style.display = 'none';
+            
+            if (checkPersistentLogin()) {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('datesSection').style.display = 'block';
+            } else {
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('datesSection').style.display = 'none';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('errorMsg').style.display = 'none';
+            }
         }
 
         function closeLoginModal() {
@@ -1393,12 +1445,25 @@
         function handleLogin(e) {
             e.preventDefault();
             const inputVal = document.getElementById('passwordInput').value;
+            const remember = document.getElementById('rememberMe').checked;
+
             if (inputVal === 'Manoman01!') {
+                if (remember) {
+                    localStorage.setItem('skippa_band_logged_in', 'true');
+                }
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('datesSection').style.display = 'block';
             } else {
                 document.getElementById('errorMsg').style.display = 'block';
             }
+        }
+
+        function logout() {
+            localStorage.removeItem('skippa_band_logged_in');
+            document.getElementById('datesSection').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('rememberMe').checked = false;
         }
 
         // Sluit modal bij klikken op achtergrond
