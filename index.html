@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto+Condensed:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+    <!-- CryptoJS bibliotheek voor verificatie (werkt zowel lokaal als op GitHub Pages) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     
     <style>
         :root {
@@ -1419,6 +1421,9 @@
 
         filterPastShows();
 
+        // De SHA-256 hash van het wachtwoord 'Manoman01!'
+        const PASSWORD_HASH = "151c68bf764f697472cfdf7ec4c6beec71c5040f7b02534f59c25cf628904dfd";
+
         // Modal / Inlog Logica met Persistentie (localStorage)
         function checkPersistentLogin() {
             return localStorage.getItem('skippa_band_logged_in') === 'true';
@@ -1447,7 +1452,11 @@
             const inputVal = document.getElementById('passwordInput').value;
             const remember = document.getElementById('rememberMe').checked;
 
-            if (inputVal === 'Manoman01!') {
+            // Bereken de SHA-256 hash van het ingevoerde wachtwoord via CryptoJS
+            const inputHash = CryptoJS.SHA256(inputVal).toString();
+
+            // Vergelijk de hashes met elkaar
+            if (inputHash === PASSWORD_HASH) {
                 if (remember) {
                     localStorage.setItem('skippa_band_logged_in', 'true');
                 }
