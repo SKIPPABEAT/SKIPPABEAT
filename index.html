@@ -1,1823 +1,3627 @@
 <!DOCTYPE html>
+
 <html lang="nl">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>SKIPPABEAT - Rocksteady Reggae Punk Whatever Ska</title>
+
     <!-- Font Awesome voor Social Media Icons, Vlaggen & Slider Pijlen -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Google Fonts voor Ska / Punk Sfeer -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto+Condensed:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
-    <!-- CryptoJS bibliotheek voor verificatie (werkt zowel lokaal als op GitHub Pages) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
     
+
     <style>
+
         :root {
+
             --bg-black: #0a0a0a;
+
             --bg-card: #161616;
+
             --text-white: #f5f5f5;
+
             --text-muted: #b0b0b0;
+
             --accent-yellow: #ffcc00;
+
             --accent-red: #e63946;
+
             --border-gray: #444444;
+
             --border-color: #282828;
+
         }
+
+
 
         * {
+
             box-sizing: border-box;
+
             margin: 0;
+
             padding: 0;
+
         }
+
+
 
         body {
+
             background-color: var(--bg-black);
+
             color: var(--text-white);
+
             font-family: 'Roboto Condensed', sans-serif;
+
             line-height: 1.6;
+
             overflow-x: hidden;
+
         }
+
+
 
         /* Typical Ska Checkerboard Accent Pattern */
+
         .ska-checkerboard {
+
             height: 16px;
+
             width: 100%;
+
             background-image: linear-gradient(45deg, #ffffff 25%, transparent 25%), 
+
                               linear-gradient(-45deg, #ffffff 25%, transparent 25%), 
+
                               linear-gradient(45deg, transparent 75%, #ffffff 75%), 
+
                               linear-gradient(-45deg, transparent 75%, #ffffff 75%);
+
             background-size: 16px 16px;
+
             background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+
             background-color: #000000;
+
         }
+
+
 
         /* Navigation Bar */
+
         nav {
+
             background-color: rgba(10, 10, 10, 0.95);
+
             position: sticky;
+
             top: 0;
+
             z-index: 1000;
+
             border-bottom: 2px solid var(--border-gray);
+
         }
+
+
 
         .nav-container {
+
             max-width: 1200px;
+
             margin: 0 auto;
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             padding: 12px 20px;
+
         }
+
+
 
         .nav-left {
+
             display: flex;
+
             align-items: center;
+
             gap: 20px;
+
         }
+
+
 
         .nav-email {
+
             display: flex;
+
             align-items: center;
+
             gap: 8px;
+
             color: var(--text-white);
+
             text-decoration: none;
+
             font-weight: 700;
+
             font-size: 0.95rem;
+
             transition: color 0.2s;
+
         }
+
+
 
         .nav-email i {
+
             font-size: 1.2rem;
+
             color: var(--text-white);
+
         }
+
+
 
         .nav-email:hover, .nav-email:hover i {
+
             color: var(--accent-yellow);
+
         }
+
+
 
         /* Language Switcher Styles */
+
         .lang-switch {
+
             display: flex;
+
             align-items: center;
+
             gap: 6px;
+
         }
+
+
 
         .lang-btn {
+
             background: none;
+
             border: 2px solid transparent;
+
             border-radius: 4px;
+
             cursor: pointer;
+
             padding: 2px;
+
             display: flex;
+
             align-items: center;
+
             opacity: 0.5;
+
             transition: opacity 0.2s, border-color 0.2s;
+
         }
+
+
 
         .lang-btn.active {
+
             opacity: 1;
+
             border-color: var(--accent-yellow);
+
         }
+
+
 
         .lang-btn:hover {
+
             opacity: 0.9;
+
         }
+
+
 
         .flag-icon {
+
             width: 24px;
+
             height: 16px;
+
             object-fit: cover;
+
             border-radius: 2px;
+
             display: block;
+
         }
+
+
 
         .nav-links {
+
             display: flex;
+
             list-style: none;
+
             gap: 20px;
+
             align-items: center;
+
         }
+
+
 
         .nav-links a {
+
             color: var(--text-white);
+
             text-decoration: none;
+
             font-weight: 700;
+
             text-transform: uppercase;
+
             font-size: 1rem;
+
             transition: color 0.2s;
+
         }
+
+
 
         .nav-links a:hover {
+
             color: var(--accent-yellow);
+
         }
+
+
 
         /* Footer Login Button */
+
         .bottom-login-container {
+
             text-align: center;
+
             margin-top: 30px;
+
         }
+
+
 
         .nav-login-btn {
+
             background: transparent;
+
             border: 1px solid var(--accent-yellow);
+
             color: var(--accent-yellow);
+
             padding: 8px 18px;
+
             border-radius: 4px;
+
             cursor: pointer;
+
             font-family: 'Roboto Condensed', sans-serif;
+
             font-weight: bold;
+
             text-transform: uppercase;
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 8px;
+
             font-size: 0.9rem;
+
             transition: all 0.2s ease;
+
         }
+
+
 
         .nav-login-btn:hover {
+
             background-color: var(--accent-yellow);
+
             color: #000;
+
         }
+
+
 
         .mobile-menu-btn {
+
             display: none;
+
             background: none;
+
             border: none;
+
             color: var(--text-white);
+
             font-size: 1.5rem;
+
             cursor: pointer;
+
         }
+
+
 
         /* Modal / Popup Styling */
+
         .modal-overlay {
+
             position: fixed;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 100%;
+
             background: rgba(0, 0, 0, 0.85);
+
             display: none;
+
             justify-content: center;
+
             align-items: center;
+
             z-index: 2000;
+
             backdrop-filter: blur(5px);
+
         }
+
+
 
         .modal-overlay.active {
+
             display: flex;
+
         }
+
+
 
         .modal-card {
+
             background-color: var(--bg-card);
+
             border: 2px solid var(--accent-yellow);
+
             border-radius: 8px;
+
             width: 90%;
+
             max-width: 500px;
+
             padding: 30px;
+
             position: relative;
+
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+
         }
+
+
 
         .modal-close {
+
             position: absolute;
+
             top: 15px;
+
             right: 15px;
+
             background: none;
+
             border: none;
+
             color: var(--text-muted);
+
             font-size: 1.5rem;
+
             cursor: pointer;
+
             transition: color 0.2s;
+
         }
+
+
 
         .modal-close:hover {
+
             color: var(--accent-red);
+
         }
+
+
 
         .modal-title {
+
             font-family: 'Permanent Marker', cursive;
+
             color: var(--accent-yellow);
+
             font-size: 1.8rem;
+
             margin-bottom: 15px;
+
             border-bottom: 1px dashed var(--border-gray);
+
             padding-bottom: 10px;
+
         }
+
+
 
         .login-form {
+
             display: flex;
+
             flex-direction: column;
+
             gap: 15px;
+
         }
+
+
 
         .login-input {
+
             width: 100%;
+
             padding: 12px;
+
             background-color: #000;
+
             border: 1px solid var(--border-gray);
+
             border-radius: 4px;
+
             color: var(--text-white);
+
             font-size: 1rem;
+
             outline: none;
+
         }
+
+
 
         .login-input:focus {
+
             border-color: var(--accent-yellow);
+
         }
+
+
 
         .remember-me {
+
             display: flex;
+
             align-items: center;
+
             gap: 8px;
+
             color: var(--text-muted);
+
             font-size: 0.9rem;
+
             cursor: pointer;
+
             user-select: none;
+
         }
+
+
 
         .remember-me input {
+
             accent-color: var(--accent-yellow);
+
             width: 16px;
+
             height: 16px;
+
             cursor: pointer;
+
         }
+
+
 
         .login-btn-submit {
+
             background-color: var(--accent-yellow);
+
             color: #000;
+
             border: none;
+
             padding: 12px;
+
             border-radius: 4px;
+
             font-weight: bold;
+
             font-size: 1rem;
+
             cursor: pointer;
+
             text-transform: uppercase;
+
             transition: background 0.2s;
+
         }
+
+
 
         .login-btn-submit:hover {
+
             background-color: #e6b800;
+
         }
+
+
 
         .btn-logout {
+
             background-color: transparent;
+
             color: var(--accent-red);
+
             border: 1px solid var(--accent-red);
+
             padding: 8px 15px;
+
             border-radius: 4px;
+
             cursor: pointer;
+
             font-weight: bold;
+
             margin-top: 15px;
+
             width: 100%;
+
             transition: all 0.2s ease;
+
         }
+
+
 
         .btn-logout:hover {
+
             background-color: var(--accent-red);
+
             color: #fff;
+
         }
+
+
 
         .error-msg {
+
             color: var(--accent-red);
+
             font-size: 0.9rem;
+
             display: none;
+
             font-weight: bold;
+
         }
+
+
 
         .optional-dates-list {
+
             list-style: none;
+
             margin-top: 15px;
+
             display: flex;
+
             flex-direction: column;
+
             gap: 12px;
+
         }
+
+
 
         .optional-date-item {
+
             background-color: #000;
+
             border-left: 4px solid var(--accent-yellow);
+
             padding: 12px 15px;
+
             border-radius: 0 6px 6px 0;
+
         }
+
+
 
         .optional-date-item strong {
+
             color: var(--accent-yellow);
+
             display: block;
+
             font-size: 1.05rem;
+
         }
+
+
 
         .optional-date-item span {
+
             color: var(--text-white);
+
             font-size: 0.95rem;
+
         }
+
+
 
         /* Banner Header */
+
         .banner-container {
+
             width: 100%;
+
             background-color: #000;
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             border-bottom: 1px solid var(--border-color);
+
         }
+
+
 
         .banner-img {
+
             width: 100%;
+
             max-width: 1200px;
+
             height: auto;
+
             aspect-ratio: 4279 / 873;
+
             object-fit: cover;
+
             display: block;
+
         }
+
+
 
         /* Main Container */
+
         .container {
+
             max-width: 1100px;
+
             margin: 0 auto;
+
             padding: 40px 20px;
+
         }
+
+
 
         section {
+
             margin-bottom: 50px;
+
         }
+
+
 
         .section-title {
+
             font-family: 'Permanent Marker', cursive;
+
             font-size: 2.5rem;
+
             color: var(--accent-yellow);
+
             text-transform: uppercase;
+
             margin-bottom: 20px;
+
             text-shadow: 2px 2px 0px #000, -2px -2px 0px var(--accent-red);
+
             border-bottom: 2px dashed var(--accent-red);
+
             padding-bottom: 5px;
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 12px;
+
             flex-wrap: wrap;
+
         }
+
+
 
         .inline-heading-logo {
+
             height: 1.1em;
+
             width: auto;
+
             vertical-align: middle;
+
             object-fit: contain;
+
             margin-bottom: 4px;
+
         }
+
+
 
         /* Social Media & Links Grid */
+
         .socials-section {
+
             text-align: center;
+
             background: #111;
+
             padding: 20px;
+
             border-radius: 8px;
+
             border: 1px solid var(--border-color);
+
         }
+
+
 
         .socials-grid {
+
             display: flex;
+
             flex-wrap: wrap;
+
             justify-content: center;
+
             gap: 12px;
+
             margin-top: 15px;
+
         }
+
+
 
         .social-card {
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             width: 50px;
+
             height: 50px;
+
             background-color: var(--bg-card);
+
             color: var(--text-white);
+
             text-decoration: none;
+
             border-radius: 50%;
+
             border: 1px solid var(--border-gray);
+
             transition: all 0.3s ease;
+
         }
+
+
 
         .social-card:hover {
+
             transform: translateY(-3px);
+
             background-color: var(--accent-yellow);
+
             color: #000;
+
             border-color: var(--accent-yellow);
+
         }
+
+
 
         .social-card i { font-size: 1.5rem; }
+
         .social-card.spotify:hover i { color: #1DB954; }
+
         .social-card.facebook:hover i { color: #1877F2; }
+
         .social-card.instagram:hover i { color: #E4405F; }
+
         .social-card.youtube:hover i { color: #FF0000; }
+
         .social-card.songkick:hover i { color: #f80046; }
+
         .social-card.merch:hover i { color: #e63946; }
 
+
+
         /* Media Grid Layout: Video + Photo Slider side-by-side */
+
         .media-grid {
+
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 20px;
+
             align-items: stretch;
+
         }
+
+
 
         /* Embedded YouTube Video */
+
         .video-container {
+
             position: relative;
+
             width: 100%;
+
             height: 0;
+
             padding-bottom: 75%;
+
             overflow: hidden;
+
             border-radius: 8px;
+
             border: 3px solid var(--border-gray);
+
             box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+
             background-color: #000;
+
         }
+
+
 
         .video-container iframe {
+
             position: absolute;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 100%;
+
             border: 0;
+
         }
+
+
 
         /* Photo Slider Styling */
+
         .photo-slider {
+
             position: relative;
+
             width: 100%;
+
             height: 0;
+
             padding-bottom: 75%;
+
             overflow: hidden;
+
             border-radius: 8px;
+
             border: 3px solid var(--border-gray);
+
             box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+
             background-color: #000;
+
         }
+
+
 
         .slider-slides {
+
             position: absolute;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 100%;
+
             display: flex;
+
             transition: transform 0.5s ease-in-out;
+
         }
+
+
 
         .slide {
+
             min-width: 100%;
+
             height: 100%;
+
             position: relative;
+
         }
+
+
 
         .slide img {
+
             width: 100%;
+
             height: 100%;
+
             object-fit: cover;
+
             display: block;
+
         }
+
+
 
         /* Slider Controls */
+
         .slider-btn {
+
             position: absolute;
+
             top: 50%;
+
             transform: translateY(-50%);
+
             background: rgba(0, 0, 0, 0.6);
+
             color: var(--accent-yellow);
+
             border: 1px solid var(--border-gray);
+
             width: 40px;
+
             height: 40px;
+
             border-radius: 50%;
+
             cursor: pointer;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             font-size: 1.2rem;
+
             z-index: 10;
+
             transition: background 0.2s, color 0.2s;
+
         }
+
+
 
         .slider-btn:hover {
+
             background: var(--accent-yellow);
+
             color: #000;
+
         }
+
+
 
         .slider-btn.prev { left: 10px; }
+
         .slider-btn.next { right: 10px; }
 
+
+
         .slider-dots {
+
             position: absolute;
+
             bottom: 10px;
+
             left: 50%;
+
             transform: translateX(-50%);
+
             display: flex;
+
             gap: 8px;
+
             z-index: 10;
+
         }
+
+
 
         .dot {
+
             width: 10px;
+
             height: 10px;
+
             border-radius: 50%;
+
             background: rgba(255, 255, 255, 0.4);
+
             cursor: pointer;
+
             transition: background 0.3s;
+
         }
+
+
 
         .dot.active {
+
             background: var(--accent-yellow);
+
             transform: scale(1.2);
+
         }
+
+
 
         /* Spotify Player Styling */
+
         .spotify-container {
+
             border-radius: 12px;
+
             overflow: hidden;
+
             border: 1px solid var(--border-gray);
+
             box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+
         }
+
+
 
         /* Swipable Nieuws Slider Styles */
+
         .news-slider-container {
+
             position: relative;
+
         }
+
+
 
         .news-grid {
+
             display: flex;
+
             gap: 20px;
+
             overflow-x: auto;
+
             scroll-snap-type: x mandatory;
+
             padding-bottom: 15px;
+
             scroll-behavior: smooth;
+
             -webkit-overflow-scrolling: touch;
+
         }
+
+
 
         .news-grid::-webkit-scrollbar {
+
             height: 6px;
+
         }
+
+
 
         .news-grid::-webkit-scrollbar-track {
+
             background: #111;
+
             border-radius: 3px;
+
         }
+
+
 
         .news-grid::-webkit-scrollbar-thumb {
+
             background: var(--accent-yellow);
+
             border-radius: 3px;
+
         }
+
+
 
         .news-card {
+
             flex: 0 0 calc(50% - 10px);
+
             min-width: 280px;
+
             scroll-snap-align: start;
+
             background-color: var(--bg-card);
+
             border: 1px solid var(--border-gray);
+
             border-radius: 8px;
+
             padding: 20px;
+
             display: flex;
+
             flex-direction: column;
+
             justify-content: space-between;
+
             transition: border-color 0.2s ease, transform 0.2s ease;
+
         }
+
+
 
         .news-card:hover {
+
             border-color: var(--accent-yellow);
+
         }
+
+
 
         .news-date {
+
             font-size: 0.85rem;
+
             color: var(--accent-yellow);
+
             font-weight: bold;
+
             margin-bottom: 8px;
+
             text-transform: uppercase;
+
         }
+
+
 
         .news-card h3 {
+
             font-size: 1.3rem;
+
             color: var(--text-white);
+
             margin-bottom: 10px;
+
         }
+
+
 
         .news-card p {
+
             color: var(--text-muted);
+
             font-size: 0.95rem;
+
             line-height: 1.5;
+
         }
+
+
 
         .swipe-hint {
+
             text-align: right;
+
             font-size: 0.85rem;
+
             color: var(--text-muted);
+
             margin-bottom: 10px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: flex-end;
+
             gap: 6px;
+
         }
+
+
 
         .swipe-hint i {
+
             color: var(--accent-yellow);
+
         }
+
+
 
         /* Bio Layout */
+
         .bio-grid {
+
             display: grid;
+
             grid-template-columns: 2fr 1fr;
+
             gap: 30px;
+
         }
+
+
 
         .bio-text p {
+
             margin-bottom: 15px;
+
             font-size: 1.1rem;
+
         }
+
+
 
         .quote-box {
+
             background-color: var(--bg-card);
+
             border-left: 4px solid var(--accent-red);
+
             padding: 15px 20px;
+
             margin: 20px 0;
+
             font-style: italic;
+
             font-size: 1.2rem;
+
         }
+
+
 
         .quote-box span {
+
             display: block;
+
             margin-top: 5px;
+
             font-size: 0.9rem;
+
             color: var(--accent-yellow);
+
             font-style: normal;
+
             font-weight: bold;
+
         }
+
+
 
         .sidebar-card {
+
             background-color: var(--bg-card);
+
             padding: 20px;
+
             border-radius: 8px;
+
             border: 1px solid var(--border-gray);
+
             margin-bottom: 20px;
+
         }
+
+
 
         .sidebar-card h3 {
+
             color: var(--accent-yellow);
+
             font-family: 'Permanent Marker', cursive;
+
             margin-bottom: 15px;
+
             font-size: 1.4rem;
+
         }
+
+
 
         .band-list {
+
             list-style: none;
+
         }
+
+
 
         .band-list li {
+
             padding: 6px 0;
+
             border-bottom: 1px dotted #333;
+
             display: flex;
+
             justify-content: space-between;
+
             font-size: 0.95rem;
+
         }
+
+
 
         .band-list .role {
+
             color: var(--accent-yellow);
+
             font-weight: bold;
+
         }
+
+
 
         .disco-list, .shows-list {
+
             list-style: none;
+
         }
+
+
 
         .disco-list li, .shows-list li {
+
             position: relative;
+
             padding-left: 20px;
+
             margin-bottom: 10px;
+
         }
+
+
 
         .disco-list li::before, .shows-list li::before {
+
             content: "★";
+
             position: absolute;
+
             left: 0;
+
             color: var(--accent-red);
+
         }
+
+
 
         .two-column-grid {
+
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 20px;
+
         }
+
+
 
         .agenda-list {
+
             display: flex;
+
             flex-direction: column;
+
             gap: 15px;
+
         }
+
+
 
         .agenda-item {
+
             display: flex;
+
             align-items: center;
+
             background-color: var(--bg-card);
+
             border: 1px solid var(--border-gray);
+
             border-radius: 8px;
+
             padding: 15px 20px;
+
             transition: transform 0.2s ease, border-color 0.2s ease;
+
         }
+
+
 
         .agenda-item:hover {
+
             transform: translateX(5px);
+
             border-color: var(--accent-yellow);
+
         }
+
+
 
         .agenda-date {
+
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             justify-content: center;
+
             background-color: #000;
+
             border: 1px solid var(--accent-red);
+
             border-radius: 6px;
+
             padding: 10px 15px;
+
             min-width: 80px;
+
             text-align: center;
+
         }
+
+
 
         .agenda-date .day {
+
             font-size: 1.5rem;
+
             font-weight: bold;
+
             color: var(--accent-yellow);
+
             line-height: 1;
+
         }
+
+
 
         .agenda-date .month {
+
             font-size: 0.85rem;
+
             text-transform: uppercase;
+
             color: var(--text-white);
+
             font-weight: bold;
+
         }
+
+
 
         .agenda-details {
+
             flex-grow: 1;
+
             padding-left: 20px;
+
         }
+
+
 
         .agenda-details h3 {
+
             font-size: 1.2rem;
+
             color: var(--text-white);
+
             margin-bottom: 4px;
+
         }
+
+
 
         .agenda-details p {
+
             font-size: 0.95rem;
+
             color: var(--text-muted);
+
         }
+
+
 
         .agenda-action {
+
             margin-left: 15px;
+
         }
+
+
 
         .btn-ticket {
+
             display: inline-block;
+
             background-color: transparent;
+
             color: var(--accent-yellow);
+
             border: 1px solid var(--accent-yellow);
+
             padding: 8px 16px;
+
             border-radius: 4px;
+
             text-decoration: none;
+
             font-weight: bold;
+
             font-size: 0.9rem;
+
             transition: all 0.2s ease;
+
         }
+
+
 
         .btn-ticket:hover {
+
             background-color: var(--accent-yellow);
+
             color: #000;
+
         }
+
+
 
         .no-shows-msg {
+
             text-align: center;
+
             color: var(--text-muted);
+
             font-style: italic;
+
             padding: 20px;
+
             background: var(--bg-card);
+
             border-radius: 8px;
+
             border: 1px solid var(--border-gray);
+
         }
+
+
 
         .merch-image-section {
+
             text-align: center;
+
             margin-top: 50px;
+
             margin-bottom: 50px;
+
         }
+
+
 
         .merch-image-section a {
+
             display: inline-block;
+
             transition: transform 0.3s ease;
+
         }
+
+
 
         .merch-image-section a:hover {
+
             transform: scale(1.02);
+
         }
+
+
 
         .merch-image-section img {
+
             max-width: 100%;
+
             height: auto;
+
             display: block;
+
             margin: 0 auto;
+
             border-radius: 8px;
+
             border: 1px solid var(--border-gray);
+
         }
+
+
 
         .contact-box {
+
             background-color: var(--accent-yellow);
+
             color: #000;
+
             padding: 35px 20px;
+
             border-radius: 8px;
+
             text-align: center;
+
         }
+
+
 
         .contact-box h2 {
+
             font-family: 'Permanent Marker', cursive;
+
             font-size: 2.2rem;
+
             margin-bottom: 10px;
+
         }
+
+
 
         .contact-box p {
+
             font-size: 1.2rem;
+
             font-weight: bold;
+
             margin-bottom: 20px;
+
         }
+
+
 
         .contact-buttons {
+
             display: flex;
+
             justify-content: center;
+
             gap: 15px;
+
             flex-wrap: wrap;
+
         }
+
+
 
         .btn-email {
+
             display: inline-block;
+
             background-color: #000;
+
             color: #fff;
+
             padding: 12px 25px;
+
             text-decoration: none;
+
             border-radius: 5px;
+
             font-weight: 700;
+
             text-transform: uppercase;
+
             transition: background 0.2s;
+
         }
+
+
 
         .btn-email:hover {
+
             background-color: var(--accent-red);
+
         }
+
+
 
         .btn-presskit-contact {
+
             display: inline-block;
+
             background-color: transparent;
+
             color: #000;
+
             border: 2px solid #000;
+
             padding: 12px 25px;
+
             text-decoration: none;
+
             border-radius: 5px;
+
             font-weight: 700;
+
             text-transform: uppercase;
+
             transition: all 0.2s ease;
+
         }
+
+
 
         .btn-presskit-contact:hover {
+
             background-color: #000;
+
             color: var(--accent-yellow);
+
         }
+
+
 
         footer {
+
             background-color: #050505;
+
             padding: 30px 20px;
+
             text-align: center;
+
             color: var(--text-muted);
+
             border-top: 1px solid var(--border-color);
+
             margin-top: 40px;
+
         }
+
+
 
         /* Responsive Mobile Styles */
+
         @media (max-width: 768px) {
+
             .nav-container {
+
                 flex-wrap: nowrap;
+
                 padding: 10px 12px;
+
                 gap: 10px;
+
             }
+
+
 
             .nav-left {
+
                 gap: 10px;
+
                 flex-shrink: 1;
+
                 overflow: hidden;
+
             }
+
+
 
             .nav-email span {
+
                 display: none;
+
             }
+
+
 
             .lang-switch {
+
                 gap: 3px;
+
             }
+
+
 
             .flag-icon {
+
                 width: 20px;
+
                 height: 14px;
+
             }
+
+
 
             .mobile-menu-btn {
+
                 display: block;
+
                 flex-shrink: 0;
+
             }
+
+
 
             .nav-links {
+
                 display: none;
+
                 flex-direction: column;
+
                 position: absolute;
+
                 top: 100%;
+
                 left: 0;
+
                 width: 100%;
+
                 background-color: var(--bg-black);
+
                 padding: 20px;
+
                 border-bottom: 2px solid var(--border-gray);
+
             }
+
+
 
             .nav-links.active {
+
                 display: flex;
+
             }
+
+
 
             .media-grid {
+
                 grid-template-columns: 1fr;
+
             }
+
+
 
             .video-container, .photo-slider {
+
                 padding-bottom: 56.25%;
+
             }
+
+
 
             .news-card {
+
                 flex: 0 0 85%;
+
             }
+
+
 
             .bio-grid, .two-column-grid {
+
                 grid-template-columns: 1fr;
+
             }
+
+
 
             .agenda-item {
+
                 flex-direction: column;
+
                 align-items: flex-start;
+
                 gap: 15px;
+
             }
+
+
 
             .agenda-details {
+
                 padding-left: 0;
+
             }
+
+
 
             .agenda-action {
+
                 margin-left: 0;
+
                 width: 100%;
+
             }
+
+
 
             .btn-ticket {
+
                 display: block;
+
                 text-align: center;
+
             }
+
+
 
             .section-title {
+
                 font-size: 2rem;
+
             }
+
+
 
             .inline-heading-logo {
+
                 height: 1em;
+
             }
+
+
 
             .contact-buttons {
+
                 flex-direction: column;
+
                 width: 100%;
+
             }
+
+
 
             .btn-email, .btn-presskit-contact {
+
                 width: 100%;
+
                 text-align: center;
+
             }
+
         }
+
     </style>
+
 </head>
+
 <body>
 
+
+
     <!-- Ska Checkerboard Header Accent -->
+
     <div class="ska-checkerboard"></div>
+
+
 
     <!-- Navigation -->
+
     <nav>
+
         <div class="nav-container">
+
             <div class="nav-left">
+
                 <a href="mailto:skippabeatnl@gmail.com" class="nav-email" title="skippabeatnl@gmail.com">
+
                     <i class="fas fa-envelope"></i>
+
                     <span>skippabeatnl@gmail.com</span>
+
                 </a>
+
                 
+
                 <!-- Language Switcher -->
+
                 <div class="lang-switch">
+
                     <button class="lang-btn active" id="btn-nl" onclick="setLanguage('nl')" title="Nederlands" aria-label="Nederlands">
+
                         <img src="https://flagcdn.com/w40/nl.png" alt="Nederlands" class="flag-icon">
+
                     </button>
+
                     <button class="lang-btn" id="btn-en" onclick="setLanguage('en')" title="English" aria-label="English">
+
                         <img src="https://flagcdn.com/w40/gb.png" alt="English" class="flag-icon">
+
                     </button>
+
                     <button class="lang-btn" id="btn-fr" onclick="setLanguage('fr')" title="Français" aria-label="Français">
+
                         <img src="https://flagcdn.com/w40/fr.png" alt="Français" class="flag-icon">
+
                     </button>
+
                     <button class="lang-btn" id="btn-de" onclick="setLanguage('de')" title="Deutsch" aria-label="Deutsch">
+
                         <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" class="flag-icon">
+
                     </button>
+
                 </div>
+
             </div>
+
+
 
             <button class="mobile-menu-btn" id="menuToggle" aria-label="Menu">
+
                 <i class="fas fa-bars"></i>
+
             </button>
+
             <ul class="nav-links" id="navLinks">
+
                 <li><a href="#home" data-i18n="nav-home">Home</a></li>
+
                 <li><a href="#media" data-i18n="nav-media">Media</a></li>
+
                 <li><a href="#agenda" data-i18n="nav-agenda">Agenda</a></li>
+
                 <li><a href="#music" data-i18n="nav-music">Muziek</a></li>
+
                 <li><a href="#news" data-i18n="nav-news">Nieuws</a></li>
+
                 <li><a href="#about" data-i18n="nav-about">Over de Band</a></li>
+
                 <li><a href="#disco" data-i18n="nav-disco">Discografie</a></li>
+
                 <li><a href="#shows" data-i18n="nav-shows">Historie</a></li>
+
                 <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
+
             </ul>
+
         </div>
+
     </nav>
 
+
+
     <!-- Modal Popup voor Inloggen & Optionele Speeldata -->
+
     <div class="modal-overlay" id="loginModal">
+
         <div class="modal-card">
+
             <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+
             
+
             <!-- Inlog formulier scherm -->
+
             <div id="loginSection">
+
                 <h3 class="modal-title"><i class="fas fa-lock"></i> Band Inlog</h3>
+
                 <p style="margin-bottom: 15px; color: var(--text-muted); font-size: 0.95rem; font-weight: bold;">
+
                     Members only
+
                 </p>
+
                 <form class="login-form" onsubmit="handleLogin(event)">
+
                     <input type="password" id="passwordInput" class="login-input" placeholder="Wachtwoord..." required>
+
                     
+
                     <!-- Onthoud mij vinkje -->
+
                     <label class="remember-me">
+
                         <input type="checkbox" id="rememberMe"> Onthoud mij op dit apparaat
+
                     </label>
 
+
+
                     <p class="error-msg" id="errorMsg">Onjuist wachtwoord! Probeer opnieuw.</p>
+
                     <button type="submit" class="login-btn-submit">Bekijken</button>
+
                 </form>
+
             </div>
+
+
 
             <!-- Resultaat scherm (optionele speeldata) -->
+
             <div id="datesSection" style="display: none;">
+
                 <h3 class="modal-title"><i class="fas fa-calendar-alt"></i> Optionele Speeldata</h3>
+
                 <ul class="optional-dates-list">
+
                     <li class="optional-date-item">
+
                         <strong>Za 13 feb</strong>
+
                         <span>De Pit, Terneuzen</span>
+
                         <div><small style="color: var(--text-muted);">(support Smoorverliefd)</small></div>
+
                     </li>
+
                     <li class="optional-date-item">
+
                         <strong>Za 15 mei</strong>
+
                         <span>Rock on the Kiosk, Phillipine</span>
+
                     </li>
+
                     <li class="optional-date-item">
+
                         <strong>Zo 16 mei</strong>
+
                         <span>Skatinee Festival Kalmthout</span>
+
                     </li>
+
                 </ul>
+
                 <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Uitloggen</button>
+
             </div>
+
         </div>
+
     </div>
+
+
 
     <!-- Top Banner Image -->
+
     <div class="banner-container" id="home">
+
         <img src="skippabeatbanner.jpg" alt="SKIPPABEAT Banner Logo" class="banner-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/4279x873/000000/ffcc00?text=*+SKIPPABEAT+*';">
+
     </div>
 
+
+
     <!-- Ska Checkerboard Divider -->
+
     <div class="ska-checkerboard"></div>
 
+
+
     <div class="container">
+
         
+
         <!-- Socials & Merch Buttons -->
+
         <section class="socials-section">
+
             <h2 style="font-family: 'Permanent Marker', cursive; color: var(--accent-yellow); font-size: 1.8rem;" data-i18n="socials-title">Volg, Beluister & Shop</h2>
+
             <div class="socials-grid">
+
                 <a href="https://open.spotify.com/playlist/3777lvTclFPTr0iFdaXfcM" target="_blank" class="social-card spotify" title="Spotify" aria-label="Spotify">
+
                     <i class="fab fa-spotify"></i>
+
                 </a>
+
                 <a href="https://www.youtube.com/@skippabeat6134/videos" target="_blank" class="social-card youtube" title="YouTube" aria-label="YouTube">
+
                     <i class="fab fa-youtube"></i>
+
                 </a>
+
                 <a href="https://www.facebook.com/skippabeatNL" target="_blank" class="social-card facebook" title="Facebook" aria-label="Facebook">
+
                     <i class="fab fa-facebook"></i>
+
                 </a>
+
                 <a href="https://www.instagram.com/skippabeatnl/" target="_blank" class="social-card instagram" title="Instagram" aria-label="Instagram">
+
                     <i class="fab fa-instagram"></i>
+
                 </a>
+
                 <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" class="social-card songkick" title="Songkick" aria-label="Songkick">
+
                     <i class="fas fa-ticket-alt"></i>
+
                 </a>
+
                 <a href="https://epicmerchstore.com/collection/artists/skippabeat/" target="_blank" class="social-card merch" title="Official Merch" aria-label="Official Merch">
+
                     <i class="fas fa-shopping-bag"></i>
+
                 </a>
+
             </div>
+
         </section>
+
+
 
         <!-- Media Section: YouTube Video & Photo Slider Side-by-Side -->
+
         <section id="media">
+
             <h2 class="section-title" data-i18n="section-media">Video & Foto's</h2>
+
             <div class="media-grid">
+
                 <!-- Video Left -->
+
                 <div class="video-container">
+
                     <iframe src="https://www.youtube.com/embed/Vga_2ITu6IU" title="SKIPPABEAT - Promo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
                 </div>
+
+
 
                 <!-- Photo Slider Right -->
+
                 <div class="photo-slider" id="photoSlider">
+
                     <div class="slider-slides" id="sliderSlides">
+
                         <div class="slide"><img src="skip1.jpg" alt="Skippabeat Foto 1"></div>
+
                         <div class="slide"><img src="skip2.JPG" alt="Skippabeat Foto 2"></div>
+
                         <div class="slide"><img src="skip3.JPG" alt="Skippabeat Foto 3"></div>
+
                         <div class="slide"><img src="skip4.JPG" alt="Skippabeat Foto 4"></div>
+
                         <div class="slide"><img src="skip5.JPG" alt="Skippabeat Foto 5"></div>
+
                         <div class="slide"><img src="skip6.JPG" alt="Skippabeat Foto 6"></div>
+
                         <div class="slide"><img src="skip7.JPG" alt="Skippabeat Foto 7"></div>
+
                         <div class="slide"><img src="skip8.jpg" alt="Skippabeat Foto 8"></div>
+
                     </div>
+
                     <button class="slider-btn prev" onclick="moveSlide(-1)" aria-label="Vorige foto"><i class="fas fa-chevron-left"></i></button>
+
                     <button class="slider-btn next" onclick="moveSlide(1)" aria-label="Volgende foto"><i class="fas fa-chevron-right"></i></button>
+
                     <div class="slider-dots" id="sliderDots"></div>
+
                 </div>
+
             </div>
+
         </section>
+
+
 
         <!-- Live Agenda / Tour Section (Dynamisch met automatische datumfiltering) -->
+
         <section id="agenda">
+
             <h2 class="section-title" data-i18n="section-agenda">Live Agenda</h2>
+
             <div class="agenda-list" id="agendaList">
+
                 <!-- Show 1: 10 Okt 2026 -->
+
                 <div class="agenda-item" data-date="2026-10-10">
+
                     <div class="agenda-date">
+
                         <span class="day">10</span>
+
                         <span class="month" data-i18n="month-oct">OKT 2026</span>
+
                     </div>
+
                     <div class="agenda-details">
+
                         <h3>GoudSKAfestival</h3>
+
                         <p><i class="fas fa-map-marker-alt" style="color: var(--accent-red);"></i> Gouda, NL — Studio Gonz</p>
+
                     </div>
+
                     <div class="agenda-action">
+
                         <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" class="btn-ticket" data-i18n="btn-tickets">Tickets & Info</a>
+
                     </div>
+
                 </div>
+
+
 
                 <!-- Show 2: 13 Nov 2026 -->
+
                 <div class="agenda-item" data-date="2026-11-13">
+
                     <div class="agenda-date">
+
                         <span class="day">13</span>
+
                         <span class="month" data-i18n="month-nov">NOV 2026</span>
+
                     </div>
+
                     <div class="agenda-details">
+
                         <h3>SKIPPABEAT + Skankin' Rebels</h3>
+
                         <p><i class="fas fa-map-marker-alt" style="color: var(--accent-red);"></i> Breda, NL — Crafft</p>
+
                         <p style="font-size: 0.85rem; color: var(--accent-yellow); margin-top: 2px;">
+
                             <i class="far fa-clock"></i> Aanvang 21:00 | Support: Skankin' Rebels
+
                         </p>
+
                     </div>
+
                     <div class="agenda-action">
+
                         <a href="https://crafftbreda.nl/" target="_blank" rel="noopener noreferrer" class="btn-ticket" data-i18n="btn-free-info">Gratis Entree & Info</a>
+
                     </div>
+
                 </div>
+
             </div>
+
             
+
             <p style="text-align: center; margin-top: 20px; font-size: 0.95rem; color: var(--text-muted);" data-i18n="agenda-footer">
+
                 Blijf op de hoogte van nieuwe showbekendmakingen via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> en onze socials!
+
             </p>
+
         </section>
+
+
 
         <!-- Spotify Player Section -->
+
         <section id="music">
+
             <h2 class="section-title" data-i18n="section-music">Beluister op Spotify</h2>
+
             <div class="spotify-container">
+
                 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3777lvTclFPTr0iFdaXfcM?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
             </div>
+
         </section>
+
+
 
         <!-- Swipable Nieuws & Updates Sectie -->
+
         <section id="news">
+
             <h2 class="section-title" data-i18n="section-news">Nieuws & Updates</h2>
+
             <div class="swipe-hint" data-i18n="swipe-hint">
+
                 <i class="fas fa-arrow-right"></i> Swipe voor oudere berichten
+
             </div>
+
             <div class="news-slider-container">
+
                 <div class="news-grid">
+
                     <!-- Bericht 1: September 2026 -->
+
                     <div class="news-card">
+
                         <div>
+
                             <div class="news-date" data-i18n="news-1-date">September 2026</div>
+
                             <h3 data-i18n="news-1-title">Wat een avond! Afscheid Marco & Mark</h3>
+
                             <p data-i18n="news-1-text">Op 30 augustus speelden we het laatste optreden met Marco en Mark in Café Parkzicht, Breda. De zaal was tot de nok gevuld, de sfeer intens, het feest groots. Samen met jullie hebben we hun jarenlange inzet, energie en muzikaliteit gevierd. Dank aan iedereen die deze bijzondere avond heeft gedeeld!</p>
+
                         </div>
+
                     </div>
+
                     <!-- Bericht 2: Augustus 2026 -->
+
                     <div class="news-card">
+
                         <div>
+
                             <div class="news-date" data-i18n="news-2-date">Augustus 2026</div>
+
                             <h3 data-i18n="news-2-title">De band is weer compleet!</h3>
+
                             <p data-i18n="news-2-text">Onze oproep voor nieuwe bandleden werd massaal gedeeld en we kregen een enorme hoeveelheid berichten, tips en aanmeldingen. Geweldig dat zoveel mensen met ons meeleven! Dankzij al die support kunnen we met trots zeggen dat Skippabeat weer compleet is. Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!</p>
+
                         </div>
+
                     </div>
+
                     <!-- Bericht 3: Juli 2026 -->
+
                     <div class="news-card">
+
                         <div>
+
                             <div class="news-date" data-i18n="news-3-date">Juli 2026</div>
+
                             <h3 data-i18n="news-3-title">Nieuwe bandleden gezocht</h3>
+
                             <p data-i18n="news-3-text">Skippabeat zoekt nieuwe leden! We zijn op zoek naar een ska-gitarist(e), trombonist(e) en trompettist(e). Zin om mee te knallen? Stuur ons een bericht!</p>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
 
+
+
         <!-- Band Bio & Line-up -->
+
         <section id="about">
+
             <h2 class="section-title">
+
                 <span data-i18n="about-title-prefix">Over</span> <img src="skippabeatsmall.jpg" alt="SKIPPABEAT" class="inline-heading-logo">
+
             </h2>
+
             <div class="bio-grid">
+
                 <div class="bio-text">
+
                     <p data-i18n="bio-p1">De Bredase skaband <strong>SKIPPABEAT</strong> is uitgegroeid tot een vaste waarde in Breda en ver daarbuiten. Met hun topmuzikanten brengt SKIPPABEAT een energieke en veelzijdige ska-show die iedereen laat bewegen!</p>
+
                     
+
                     <div class="quote-box">
+
                         <span data-i18n="quote-text">"Ska met een hoofdletter, punk met een knipoog, aanstekelijk als een malle."</span>
+
                         <span>— 3voor12</span>
+
                     </div>
+
+
 
                     <p data-i18n="bio-p2">Al 12 jaar lang zet SKIPPABEAT elk podium op zijn kop met opzwepende ska-shows! Ontstaan uit de as van Manoman, is deze Bredase bende uitgegroeid tot een geoliede, Engelstalige ska-machine die stuiterende ska, rauwe punk en vette reggae in hoog tempo op je afstuurt.</p>
 
+
+
                     <p data-i18n="bio-p3">Krachtige vocalen, explosieve MC gecombineerd met dikke samples, een pompende ritmesectie en vette blazerspartijen vormen samen de brandstof voor een energieke live-experience. Stilvallen is er niet bij; elk optreden wordt neergezet als een uitbundig feestje.</p>
 
+
+
                     <p data-i18n="bio-p4">Gewapend met een arsenaal aan eigen tracks en een niet te stoppen live-energie raast de band langs feesten, kroegen en festivals. Trek je <em>skankin' shoes</em> maar vast aan, want als SKIPPABEAT speelt, gaat de zaal gegarandeerd plat!</p>
+
                 </div>
+
+
 
                 <div class="bio-sidebar">
+
                     <div class="sidebar-card">
+
                         <h3 data-i18n="lineup-title">Bandbezetting</h3>
+
                         <p style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-muted);" data-i18n="lineup-subtitle">Elfkoppige bezetting op het podium:</p>
+
                         <ul class="band-list">
+
                             <li><span>Mariska Kerst</span> <span class="role" data-i18n="role-vocals">Zang</span></li>
+
                             <li><span>Michael Benjaminsz</span> <span class="role" data-i18n="role-hypeman">Zang / Hypeman</span></li>
+
                             <li><span>Erik De Ridder</span> <span class="role" data-i18n="role-guitar">Gitaar</span></li>
+
                             <li><span>Dirk Kleemans</span> <span class="role" data-i18n="role-bass">Basgitaar</span></li>
+
                             <li><span>Sander Martinet</span> <span class="role" data-i18n="role-keys-trumpet">Toetsen & Trompet</span></li>
+
                             <li><span>Hans Albers</span> <span class="role" data-i18n="role-drums">Drums</span></li>
+
                             <li><span>Tim Schrijver</span> <span class="role" data-i18n="role-percussion">Percussie</span></li>
+
                             <li><span>Renate de Jong</span> <span class="role" data-i18n="role-sax">Sax</span></li>
+
                             <li><span>Wouter van Bavel</span> <span class="role" data-i18n="role-trombone">Trombone</span></li>
+
                             <li><span>Leo van Mook</span> <span class="role" data-i18n="role-trumpet">Trompet</span></li>
+
                             <li><span>Diederik Smits</span> <span class="role" data-i18n="role-trumpet">Trompet</span></li>
+
                         </ul>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
+
 
         <!-- Discography & Shows Section -->
+
         <div class="two-column-grid">
+
             <section id="disco" class="sidebar-card" style="margin-bottom: 0;">
+
                 <h3 style="font-size: 1.8rem; color: var(--accent-yellow);" data-i18n="section-disco">Discografie</h3>
+
                 <ul class="disco-list" style="margin-top: 15px;">
+
                     <li><strong>EP To The Moon and Back</strong> (2018)</li>
+
                     <li><strong>EP Who Knows My Name</strong> (2021)</li>
+
                     <li><strong data-i18n="disco-compilation">LP Skasjock #1 (2021) — Verzamel-LP met o.a. SKIPPABEAT</strong></li>
+
                     <li><strong data-i18n="disco-video">Videoclip Who Knows My Name (2022)</strong></li>
+
                     <li><strong data-i18n="disco-live">2 Live video's (2025)</strong></li>
+
                     <li><strong style="color: var(--accent-yellow);" data-i18n="disco-new">Nieuwe EP (Verwacht in 2026)</strong></li>
+
                 </ul>
+
             </section>
+
+
 
             <section id="shows" class="sidebar-card" style="margin-bottom: 0;">
+
                 <h3 style="font-size: 1.8rem; color: var(--accent-yellow);" data-i18n="section-shows">Podia & Festivals</h3>
+
                 <ul class="shows-list" style="margin-top: 15px;">
+
                     <li><strong data-i18n="shows-venues-title">Podia:</strong> Paradiso Amsterdam, Breda Mezz, Tilburg 013, Bibelot Dordrecht, Den Bosch W2, EM2 Groningen, So What Gouda.</li>
+
                     <li><strong data-i18n="shows-festivals-title">Festivals:</strong> Breda Barst, Bevrijdingsfestival Breda, Palm Parkies, Et-Ska-Tera, De Kaaij, GoudSKAfestival, Offbeat festival, Breda Jazz Festival.</li>
+
                     <li><strong data-i18n="shows-shared-title">Gedeeld podium met:</strong> Bazzookas, Gallowstreet, The Toasters, Mark Foggo's Skasters, Muyayo Riff, My Baby, Ernst Jansz.</li>
+
                 </ul>
+
             </section>
+
         </div>
+
+
 
         <!-- Klikbare Merch Afbeelding Sectie -->
+
         <section class="merch-image-section">
+
             <a href="https://epicmerchstore.com/collection/artists/skippabeat/" target="_blank" rel="noopener noreferrer">
+
                 <img src="skippamerch.jpg" alt="Skippa Merch">
+
             </a>
+
         </section>
+
+
 
         <!-- Contact Section met Presskit Knop -->
+
         <section id="contact">
+
             <div class="contact-box">
+
                 <h2 data-i18n="contact-title">Boekingen & Contact</h2>
+
                 <p data-i18n="contact-text">Wil je SKIPPABEAT op jouw festival, podium of feest?</p>
+
                 <div class="contact-buttons">
+
                     <a href="mailto:skippabeatnl@gmail.com" class="btn-email">
+
                         <i class="fas fa-envelope"></i> <span data-i18n="contact-btn">Mail skippabeatnl@gmail.com</span>
+
                     </a>
+
                     <a href="https://drive.google.com/drive/folders/1W1aEqoRRSzI4Y1ZcJ7v3p9taucuFyQ3U?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn-presskit-contact">
+
                         <i class="fas fa-folder-open"></i> Presskit / Promokit
+
                     </a>
+
                 </div>
+
             </div>
+
         </section>
 
+
+
         <!-- Inlogknop helemaal onderaan onder Contact -->
+
         <div class="bottom-login-container">
+
             <button class="nav-login-btn" onclick="openLoginModal()" title="Inloggen voor optionele data">
+
                 <i class="fas fa-lock"></i> Inlog Band
+
             </button>
+
         </div>
+
+
 
     </div>
 
+
+
     <!-- Ska Checkerboard Divider -->
+
     <div class="ska-checkerboard"></div>
 
+
+
     <!-- Footer -->
+
     <footer>
+
         <p>&copy; 2026 SKIPPABEAT. All rights reserved.</p>
+
         <p style="font-size: 0.85rem; margin-top: 5px;" data-i18n="footer-tagline">Rocksteady Reggae Punk Whatever Ska uit Breda</p>
+
     </footer>
 
+
+
     <!-- Scripts -->
+
     <script>
+
         // Automatic Past Shows Filter
+
         function filterPastShows() {
+
             const today = new Date();
+
             today.setHours(0, 0, 0, 0);
 
+
+
             const agendaList = document.getElementById('agendaList');
+
             const showItems = agendaList.querySelectorAll('.agenda-item');
+
             let visibleShowsCount = 0;
 
+
+
             showItems.forEach(item => {
+
                 const showDateStr = item.getAttribute('data-date');
+
                 if (showDateStr) {
+
                     const showDate = new Date(showDateStr + 'T23:59:59');
+
                     if (showDate < today) {
+
                         item.remove();
+
                     } else {
+
                         visibleShowsCount++;
+
                     }
+
                 }
+
             });
 
+
+
             if (visibleShowsCount === 0) {
+
                 const currentLang = document.documentElement.lang || 'nl';
+
                 const msgText = translations[currentLang] ? translations[currentLang]['no-shows-msg'] : 'Binnenkort meer nieuwe optredens bekend!';
+
                 agendaList.innerHTML = `<div class="no-shows-msg" data-i18n="no-shows-msg">${msgText}</div>`;
+
             }
+
         }
+
+
 
         filterPastShows();
 
-        // De SHA-256 hash van het wachtwoord 'Manoman01!'
-        const PASSWORD_HASH = "151c68bf764f697472cfdf7ec4c6beec71c5040f7b02534f59c25cf628904dfd";
+
 
         // Modal / Inlog Logica met Persistentie (localStorage)
+
         function checkPersistentLogin() {
+
             return localStorage.getItem('skippa_band_logged_in') === 'true';
+
         }
+
+
 
         function openLoginModal() {
+
             document.getElementById('loginModal').classList.add('active');
+
             
+
             if (checkPersistentLogin()) {
+
                 document.getElementById('loginSection').style.display = 'none';
+
                 document.getElementById('datesSection').style.display = 'block';
+
             } else {
+
                 document.getElementById('loginSection').style.display = 'block';
+
                 document.getElementById('datesSection').style.display = 'none';
+
                 document.getElementById('passwordInput').value = '';
+
                 document.getElementById('errorMsg').style.display = 'none';
+
             }
+
         }
+
+
 
         function closeLoginModal() {
+
             document.getElementById('loginModal').classList.remove('active');
+
         }
+
+
 
         function handleLogin(e) {
+
             e.preventDefault();
+
             const inputVal = document.getElementById('passwordInput').value;
+
             const remember = document.getElementById('rememberMe').checked;
 
-            // Bereken de SHA-256 hash van het ingevoerde wachtwoord via CryptoJS
-            const inputHash = CryptoJS.SHA256(inputVal).toString();
 
-            // Vergelijk de hashes met elkaar
-            if (inputHash === PASSWORD_HASH) {
+
+            if (inputVal === 'Manoman01!') {
+
                 if (remember) {
+
                     localStorage.setItem('skippa_band_logged_in', 'true');
+
                 }
+
                 document.getElementById('loginSection').style.display = 'none';
+
                 document.getElementById('datesSection').style.display = 'block';
+
             } else {
+
                 document.getElementById('errorMsg').style.display = 'block';
+
             }
+
         }
+
+
 
         function logout() {
+
             localStorage.removeItem('skippa_band_logged_in');
+
             document.getElementById('datesSection').style.display = 'none';
+
             document.getElementById('loginSection').style.display = 'block';
+
             document.getElementById('passwordInput').value = '';
+
             document.getElementById('rememberMe').checked = false;
+
         }
 
+
+
         // Sluit modal bij klikken op achtergrond
+
         window.addEventListener('click', (e) => {
+
             const modal = document.getElementById('loginModal');
+
             if (e.target === modal) {
+
                 closeLoginModal();
+
             }
+
         });
+
+
 
         // Mobile Menu Toggle
+
         const menuToggle = document.getElementById('menuToggle');
+
         const navLinks = document.getElementById('navLinks');
 
+
+
         menuToggle.addEventListener('click', () => {
+
             navLinks.classList.toggle('active');
+
         });
+
+
 
         document.querySelectorAll('.nav-links a').forEach(link => {
+
             link.addEventListener('click', () => {
+
                 navLinks.classList.remove('active');
+
             });
+
         });
+
+
 
         // Photo Slider Logic
+
         let currentSlide = 0;
+
         const slides = document.querySelectorAll('.slide');
+
         const sliderSlides = document.getElementById('sliderSlides');
+
         const sliderDots = document.getElementById('sliderDots');
+
         let autoSlideTimer;
 
+
+
         slides.forEach((_, index) => {
+
             const dot = document.createElement('div');
+
             dot.classList.add('dot');
+
             if (index === 0) dot.classList.add('active');
+
             dot.addEventListener('click', () => goToSlide(index));
+
             sliderDots.appendChild(dot);
+
         });
+
+
 
         const dots = document.querySelectorAll('.dot');
 
+
+
         function updateSlider() {
+
             sliderSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+
             dots.forEach((dot, index) => {
+
                 dot.classList.toggle('active', index === currentSlide);
+
             });
+
         }
+
+
 
         function moveSlide(direction) {
+
             currentSlide = (currentSlide + direction + slides.length) % slides.length;
+
             updateSlider();
+
             resetAutoSlide();
+
         }
+
+
 
         function goToSlide(index) {
+
             currentSlide = index;
+
             updateSlider();
+
             resetAutoSlide();
+
         }
+
+
 
         function startAutoSlide() {
+
             autoSlideTimer = setInterval(() => {
+
                 currentSlide = (currentSlide + 1) % slides.length;
+
                 updateSlider();
+
             }, 4000);
+
         }
 
+
+
         function resetAutoSlide() {
+
             clearInterval(autoSlideTimer);
+
             startAutoSlide();
+
         }
+
+
 
         startAutoSlide();
 
+
+
         // Translations Dictionary
+
         const translations = {
+
             nl: {
+
                 "nav-home": "Home",
+
                 "nav-media": "Media",
+
                 "nav-agenda": "Agenda",
+
                 "nav-music": "Muziek",
+
                 "nav-news": "Nieuws",
+
                 "nav-about": "Over de Band",
+
                 "nav-disco": "Discografie",
+
                 "nav-shows": "Historie",
+
                 "nav-contact": "Contact",
+
                 "socials-title": "Volg, Beluister & Shop",
+
                 "section-media": "Video & Foto's",
+
                 "section-music": "Beluister op Spotify",
+
                 "section-news": "Nieuws & Updates",
+
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Swipe voor oudere berichten',
+
                 "news-1-date": "September 2026",
+
                 "news-1-title": "Wat een avond! Afscheid Marco & Mark",
+
                 "news-1-text": "Op 30 augustus speelden we het laatste optreden met Marco en Mark in Café Parkzicht, Breda. De zaal was tot de nok gevuld, de sfeer intens, het feest groots. Samen met jullie hebben we hun jarenlange inzet, energie en muzikaliteit gevierd. Dank aan iedereen die deze bijzondere avond heeft gedeeld!",
+
                 "news-2-date": "Augustus 2026",
+
                 "news-2-title": "De band is weer compleet!",
+
                 "news-2-text": "Onze oproep voor nieuwe bandleden werd massaal gedeeld en we kregen een enorme hoeveelheid berichten, tips en aanmeldingen. Geweldig dat zoveel mensen met ons meeleven! Dankzij al die support kunnen we met trots zeggen dat Skippabeat weer compleet is. Nieuwe gezichten, nieuwe energie — klaar voor de volgende ronde optredens!",
+
                 "news-3-date": "Juli 2026",
+
                 "news-3-title": "Nieuwe bandleden gezocht",
+
                 "news-3-text": "Skippabeat zoekt nieuwe leden! We zijn op zoek naar een ska-gitarist(e), trombonist(e) en trompettist(e). Zin om mee te knallen? Stuur ons een bericht!",
+
                 "section-agenda": "Live Agenda",
+
                 "month-oct": "OKT 2026",
+
                 "month-nov": "NOV 2026",
+
                 "btn-tickets": "Tickets & Info",
+
                 "btn-free-info": "Gratis Entree & Info",
+
                 "no-shows-msg": "Binnenkort meer nieuwe optredens bekend!",
+
                 "agenda-footer": 'Blijf op de hoogte van nieuwe showbekendmakingen via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> en onze socials!',
+
                 "about-title-prefix": "Over",
+
                 "bio-p1": "De Bredase skaband <strong>SKIPPABEAT</strong> is uitgegroeid tot een vaste waarde in Breda en ver daarbuiten. Met hun topmuzikanten brengt SKIPPABEAT een energieke en veelzijdige ska-show die iedereen laat bewegen!",
+
                 "quote-text": '"Ska met een hoofdletter, punk met een knipoog, aanstekelijk als een malle."',
+
                 "bio-p2": "Al 12 jaar lang zet SKIPPABEAT elk podium op zijn kop met opzwepende ska-shows! Ontstaan uit de as van Manoman, is deze Bredase bende uitgegroeid tot een geoliede, Engelstalige ska-machine die stuiterende ska, rauwe punk en vette reggae in hoog tempo op je afstuurt.",
+
                 "bio-p3": "Krachtige vocalen, explosieve MC gecombineerd met dikke samples, een pompende ritmesectie en vette blazerspartijen vormen samen de brandstof voor een energieke live-experience. Stilvallen is er niet bij; elk optreden wordt neergezet als een uitbundig feestje.",
+
                 "bio-p4": "Gewapend met een arsenaal aan eigen tracks en een niet te stoppen live-energie raast de band langs feesten, kroegen en festivals. Trek je <em>skankin' shoes</em> maar vast aan, want als SKIPPABEAT speelt, gaat de zaal gegarandeerd plat!",
+
                 "lineup-title": "Bandbezetting",
+
                 "lineup-subtitle": "Elfkoppige bezetting op het podium:",
+
                 "role-vocals": "Zang",
+
                 "role-hypeman": "Zang / Hypeman",
+
                 "role-guitar": "Gitaar",
+
                 "role-bass": "Basgitaar",
+
                 "role-keys-trumpet": "Toetsen & Trompet",
+
                 "role-drums": "Drums",
+
                 "role-percussion": "Percussie",
+
                 "role-sax": "Sax",
+
                 "role-trombone": "Trombone",
+
                 "role-trumpet": "Trompet",
+
                 "section-disco": "Discografie",
+
                 "disco-compilation": "LP Skasjock #1 (2021) — Verzamel-LP met o.a. SKIPPABEAT",
+
                 "disco-video": "Videoclip Who Knows My Name (2022)",
+
                 "disco-live": "2 Live video's (2025)",
+
                 "disco-new": "Nieuwe EP (Verwacht in 2026)",
+
                 "section-shows": "Podia & Festivals",
+
                 "shows-venues-title": "Podia:",
+
                 "shows-festivals-title": "Festivals:",
+
                 "shows-shared-title": "Gedeeld podium met:",
+
                 "contact-title": "Boekingen & Contact",
+
                 "contact-text": "Wil je SKIPPABEAT op jouw festival, podium of feest?",
+
                 "contact-btn": "Mail skippabeatnl@gmail.com",
+
                 "footer-tagline": "Rocksteady Reggae Punk Whatever Ska uit Breda"
+
             },
+
             en: {
+
                 "nav-home": "Home",
+
                 "nav-media": "Media",
+
                 "nav-agenda": "Tour Dates",
+
                 "nav-music": "Music",
+
                 "nav-news": "News",
+
                 "nav-about": "About the Band",
+
                 "nav-disco": "Discography",
+
                 "nav-shows": "History",
+
                 "nav-contact": "Contact",
+
                 "socials-title": "Follow, Listen & Shop",
+
                 "section-media": "Video & Photos",
+
                 "section-music": "Listen on Spotify",
+
                 "section-news": "News & Updates",
+
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Swipe for older posts',
+
                 "news-1-date": "September 2026",
+
                 "news-1-title": "What a night! Farewell Marco & Mark",
+
                 "news-1-text": "On August 30th we played our final show with Marco and Mark at Café Parkzicht, Breda. The venue was packed to the brim, the atmosphere intense, and the party wild. Together with you, we celebrated their years of dedication, energy, and music. Thank you to everyone who shared this special night with us!",
+
                 "news-2-date": "August 2026",
+
                 "news-2-title": "The band is complete again!",
+
                 "news-2-text": "Our call for new band members was shared massively, resulting in a huge wave of messages, leads, and applications. Awesome to see so many people care about Skippabeat! Thanks to all that support, we can proudly say Skippabeat is fully complete again. New faces, new energy — ready for the next round of shows!",
+
                 "news-3-date": "July 2026",
+
                 "news-3-title": "New band members wanted",
+
                 "news-3-text": "Skippabeat is looking for new members! We are searching for a ska guitarist, trombonist, and trumpeter. Ready to blow the roof off? Send us a message!",
+
                 "section-agenda": "Live Agenda",
+
                 "month-oct": "OCT 2026",
+
                 "month-nov": "NOV 2026",
+
                 "btn-tickets": "Tickets & Info",
+
                 "btn-free-info": "Free Entry & Info",
+
                 "no-shows-msg": "More shows announced soon!",
+
                 "agenda-footer": 'Stay updated on new show announcements via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> and our socials!',
+
                 "about-title-prefix": "About",
+
                 "bio-p1": "Ska band <strong>SKIPPABEAT</strong> from Breda (NL) has grown into an established household name in Breda and far beyond. With top musicians, SKIPPABEAT delivers an energetic and versatile ska show that gets everyone moving!",
+
                 "quote-text": '"Ska with a capital S, punk with a wink, infectious as hell."',
+
                 "bio-p2": "For 12 years, SKIPPABEAT has been turning every stage upside down with high-energy ska shows! Born from the ashes of Manoman, this gang from Breda has grown into a well-oiled ska machine delivering bouncy ska, raw punk, and heavy reggae at high speed.",
+
                 "bio-p3": "Powerful vocals, an explosive MC combined with fat samples, a pumping rhythm section, and tight brass parts form the fuel for an energetic live experience. There is no standing still; every gig turns into a full-blown party.",
+
                 "bio-p4": "Armed with an arsenal of original tracks and unstoppable live energy, the band blasts through festivals, venues, and pubs. Put on your <em>skankin' shoes</em>, because when SKIPPABEAT plays, the place is guaranteed to go wild!",
+
                 "lineup-title": "Band Line-Up",
+
                 "lineup-subtitle": "Eleven-piece lineup on stage:",
+
                 "role-vocals": "Vocals",
+
                 "role-hypeman": "Vocals / Hypeman",
+
                 "role-guitar": "Guitar",
+
                 "role-bass": "Bass Guitar",
+
                 "role-keys-trumpet": "Keys & Trumpet",
+
                 "role-drums": "Drums",
+
                 "role-percussion": "Percussion",
+
                 "role-sax": "Saxophone",
+
                 "role-trombone": "Trombone",
+
                 "role-trumpet": "Trumpet",
+
                 "section-disco": "Discography",
+
                 "disco-compilation": "LP Skasjock #1 (2021) — Compilation LP ft. SKIPPABEAT",
+
                 "disco-video": "Music Video Who Knows My Name (2022)",
+
                 "disco-live": "2 Live videos (2025)",
+
                 "disco-new": "New EP (Expected 2026)",
+
                 "section-shows": "Venues & Festivals",
+
                 "shows-venues-title": "Venues:",
+
                 "shows-festivals-title": "Festivals:",
+
                 "shows-shared-title": "Shared the stage with:",
+
                 "contact-title": "Booking & Contact",
+
                 "contact-text": "Want SKIPPABEAT at your festival, venue, or party?",
+
                 "contact-btn": "Mail skippabeatnl@gmail.com",
+
                 "footer-tagline": "Rocksteady Reggae Punk Whatever Ska from Breda"
+
             },
+
             fr: {
+
                 "nav-home": "Accueil",
+
                 "nav-media": "Média",
+
                 "nav-agenda": "Concerts",
+
                 "nav-music": "Musique",
+
                 "nav-news": "Actualités",
+
                 "nav-about": "Le Groupe",
+
                 "nav-disco": "Discographie",
+
                 "nav-shows": "Historique",
+
                 "nav-contact": "Contact",
+
                 "socials-title": "Suivez, Écoutez & Achetez",
+
                 "section-media": "Vidéo & Photos",
+
                 "section-music": "Écoutez sur Spotify",
+
                 "section-news": "Actualités & Mises à jour",
+
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Glissez pour les anciens messages',
+
                 "news-1-date": "Septembre 2026",
+
                 "news-1-title": "Quelle soirée ! Adieu Marco & Mark",
+
                 "news-1-text": "Le 30 août, nous avons joué notre dernier concert avec Marco et Mark au Café Parkzicht à Breda. La salle était comble, l'ambiance intense et la fête incroyable. Merci à tous d'avoir partagé cette soirée spéciale avec nous !",
+
                 "news-2-date": "Août 2026",
+
                 "news-2-title": "Le groupe est de nouveau au complet !",
+
                 "news-2-text": "Notre appel pour trouver de nouveaux membres a été largement partagé. Grâce à tout ce soutien, nous sommes fiers d'annoncer que Skippabeat est à nouveau au complet. Nouveaux visages, nouvelle énergie — prêts pour la suite !",
+
                 "news-3-date": "Juillet 2026",
+
                 "news-3-title": "Recherche de nouveaux musiciens",
+
                 "news-3-text": "Skippabeat recherche de nouveaux membres ! Nous cherchons un(e) guitariste ska, un(e) tromboniste et un(e) trompettiste. Envie de nous rejoindre ? Envoyez-nous un message !",
+
                 "section-agenda": "Concerts à venir",
+
                 "month-oct": "OCT 2026",
+
                 "month-nov": "NOV 2026",
+
                 "btn-tickets": "Billets & Info",
+
                 "btn-free-info": "Entrée gratuite & Info",
+
                 "no-shows-msg": "Nouveaux concerts bientôt annoncés !",
+
                 "agenda-footer": 'Restez informés des nouveaux concerts via <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> et nos réseaux sociaux !',
+
                 "about-title-prefix": "À propos de",
+
                 "bio-p1": "Le groupe de ska <strong>SKIPPABEAT</strong> (Breda, Pays-Bas) est devenu une référence incontournable. Avec des musiciens de premier ordre, SKIPPABEAT offre un spectacle ska dynamique et varié qui fait bouger tout le monde !",
+
                 "quote-text": '"Du ska avec un grand S, du punk avec un clin d\'œil, terriblement contagieux."',
+
                 "bio-p2": "Depuis 12 ans, SKIPPABEAT enflamme toutes les scènes avec des concerts survoltés ! Né des cendres de Manoman, ce groupe est devenu une machine à ska parfaitement huilée, envoyant du ska énergique, du punk brut et du reggae à toute allure.",
+
                 "bio-p3": "Des voix puissantes, un MC explosif combiné à de gros samples, une section rythmique percutante et des cuivres cuivrés créent une expérience live survolté. Impossible de rester immobile ; chaque concert devient une grande fête.",
+
                 "bio-p4": "Armé d'un répertoire d'outils originaux et d'une énergie débordante, le groupe parcourt les festivals et les salles. Enfilez vos chaussures de dance, car quand SKIPPABEAT joue, l'ambiance est garantie !",
+
                 "lineup-title": "Membres du groupe",
+
                 "lineup-subtitle": "Formation de onze musiciens sur scène :",
+
                 "role-vocals": "Chant",
+
                 "role-hypeman": "Chant / Hypeman",
+
                 "role-guitar": "Guitare",
+
                 "role-bass": "Guitare Basse",
+
                 "role-keys-trumpet": "Clavier & Trompette",
+
                 "role-drums": "Batterie",
+
                 "role-percussion": "Percussions",
+
                 "role-sax": "Saxophone",
+
                 "role-trombone": "Trombone",
+
                 "role-trumpet": "Trompette",
+
                 "section-disco": "Discographie",
+
                 "disco-compilation": "LP Skasjock #1 (2021) — Compilation avec SKIPPABEAT",
+
                 "disco-video": "Clip vidéo Who Knows My Name (2022)",
+
                 "disco-live": "2 Vidéos live (2025)",
+
                 "disco-new": "Nouvel EP (Prévu en 2026)",
+
                 "section-shows": "Salles & Festivals",
+
                 "shows-venues-title": "Salles :",
+
                 "shows-festivals-title": "Festivals :",
+
                 "shows-shared-title": "Scène partagée avec :",
+
                 "contact-title": "Réservations & Contact",
+
                 "contact-text": "Vous voulez SKIPPABEAT dans votre festival, salle ou fête ?",
+
                 "contact-btn": "Envoyer un mail à skippabeatnl@gmail.com",
+
                 "footer-tagline": "Rocksteady Reggae Punk Whatever Ska de Breda"
+
             },
+
             de: {
+
                 "nav-home": "Startseite",
+
                 "nav-media": "Medien",
+
                 "nav-agenda": "Termine",
+
                 "nav-music": "Musik",
+
                 "nav-news": "Neuigkeiten",
+
                 "nav-about": "Über die Band",
+
                 "nav-disco": "Diskografie",
+
                 "nav-shows": "Historie",
+
                 "nav-contact": "Kontakt",
+
                 "socials-title": "Folgen, Hören & Shoppen",
+
                 "section-media": "Video & Fotos",
+
                 "section-music": "Auf Spotify hören",
+
                 "section-news": "Neuigkeiten & Updates",
+
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Wischen für ältere Beiträge',
+
                 "news-1-date": "September 2026",
+
                 "news-1-title": "Was für ein Abend! Abschied Marco & Mark",
+
                 "news-1-text": "Am 30. August spielten wir die letzte Show mit Marco und Mark im Café Parkzicht in Breda. Der Saal war gesteckt voll, die Stimmung intensiv, das Fest riesig. Danke an alle, die diesen besonderen Abend mit uns geteilt haben!",
+
                 "news-2-date": "August 2026",
+
                 "news-2-title": "Die Band ist wieder komplett!",
+
                 "news-2-text": "Unser Aufruf nach neuen Bandmitgliedern wurde riesig geteilt. Dank all der Unterstützung können wir stolz verkünden: Skippabeat ist wieder komplett. Neue Gesichter, neue Energie — bereit für die nächsten Shows!",
+
                 "news-3-date": "Juli 2026",
+
                 "news-3-title": "Neue Bandmitglieder gesucht",
+
                 "news-3-text": "Skippabeat sucht neue Mitglieder! Wir suchen eine(n) Ska-Gitarrist(en), Posaunist(en) und Trompeter(in). Lust mitzumachen? Schreib uns eine Nachricht!",
+
                 "section-agenda": "Live-Termine",
+
                 "month-oct": "OKT 2026",
+
                 "month-nov": "NOV 2026",
+
                 "btn-tickets": "Tickets & Info",
+
                 "btn-free-info": "Eintritt frei & Info",
+
                 "no-shows-msg": "Weitere Show-Ankündigungen in Kürze!",
+
                 "agenda-footer": 'Bleiben Sie über neue Show-Ankündigungen auf <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" style="color: var(--accent-yellow);">Songkick</a> und unseren Socials informiert!',
+
                 "about-title-prefix": "Über",
+
                 "bio-p1": "Die Ska-Band <strong>SKIPPABEAT</strong> aus Breda (Niederlande) ist zu einer festen Größe geworden. Mit ihren erstklassigen Musikern liefert SKIPPABEAT eine energiegeladene Ska-Show, die jeden zum Tanzen bringt!",
+
                 "quote-text": '"Ska mit einem großen S, Punk mit einem Augenzwinkern, ansteckend wie verrückt."',
+
                 "bio-p2": "Seit 12 Jahren stellt SKIPPABEAT jede Bühne mit mitreißenden Ska-Shows auf den Kopf! Aus der Asche von Manoman entstanden, hat sich die Truppe zu einer gut geölten Ska-Maschine entwickelt, die mitreißenden Ska, rauem Punk und satten Reggae im Eiltempo abliefert.",
+
                 "bio-p3": "Kraftvoller Gesang, ein explosiver MC kombiniert mit dicken Samples, eine pumpende Rhythmusgruppe und fett geblasene Bläsersätze sind der Treibstoff für ein energetisches Live-Erlebnis. Stillstehen gibt es nicht; jeder Auftritt wird zu einer ausgelassenen Party.",
+
                 "bio-p4": "Bewaffnet mit eigenen Tracks und unaufhaltsamer Live-Energie tourt die Band durch Festivals, Clubs und Kneipen. Zieh deine Tanzschuhe an, denn wenn SKIPPABEAT speelt, bebt der Saal!",
+
                 "lineup-title": "Bandbesetzung",
+
                 "lineup-subtitle": "Elfköpfige Besetzung auf der Bühne:",
+
                 "role-vocals": "Gesang",
+
                 "role-hypeman": "Gesang / Hypeman",
+
                 "role-guitar": "Gitarre",
+
                 "role-bass": "E-Bass",
+
                 "role-keys-trumpet": "Keyboard & Trompete",
+
                 "role-drums": "Schlagzeug",
+
                 "role-percussion": "Perkussion",
+
                 "role-sax": "Saxophon",
+
                 "role-trombone": "Posaune",
+
                 "role-trumpet": "Trompete",
+
                 "section-disco": "Diskografie",
+
                 "disco-compilation": "LP Skasjock #1 (2021) — Sammler-LP u.a. mit SKIPPABEAT",
+
                 "disco-video": "Musikvideo Who Knows My Name (2022)",
+
                 "disco-live": "2 Live-Videos (2025)",
+
                 "disco-new": "Neue EP (Erwartet 2026)",
+
                 "section-shows": "Bühnen & Festivals",
+
                 "shows-venues-title": "Bühnen:",
+
                 "shows-festivals-title": "Festivals:",
+
                 "shows-shared-title": "Bühne geteilt mit:",
+
                 "contact-title": "Buchungen & Kontakt",
+
                 "contact-text": "Möchtest du SKIPPABEAT auf deinem Festival, deiner Bühne oder Party buchen?",
+
                 "contact-btn": "E-Mail an skippabeatnl@gmail.com",
+
                 "footer-tagline": "Rocksteady Reggae Punk Whatever Ska aus Breda"
+
             }
+
         };
 
+
+
         function setLanguage(lang) {
+
             document.documentElement.lang = lang;
+
             
+
             ['nl', 'en', 'fr', 'de'].forEach(l => {
+
                 const btn = document.getElementById(`btn-${l}`);
+
                 if (btn) btn.classList.toggle('active', l === lang);
+
             });
 
+
+
             document.querySelectorAll('[data-i18n]').forEach(element => {
+
                 const key = element.getAttribute('data-i18n');
+
                 if (translations[lang] && translations[lang][key]) {
+
                     element.innerHTML = translations[lang][key];
+
                 }
+
             });
+
         }
+
     </script>
+
 </body>
+
 </html>
