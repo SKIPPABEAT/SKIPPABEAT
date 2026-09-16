@@ -217,20 +217,53 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
         }
 
+        /* Image Popup Modal Card Styling */
+        .img-modal-card {
+            background-color: var(--bg-card);
+            border: 2px solid var(--accent-yellow);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 544px;
+            padding: 10px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-img {
+            width: 100%;
+            height: auto;
+            max-width: 544px;
+            max-height: 543px;
+            object-fit: contain;
+            border-radius: 4px;
+            display: block;
+        }
+
         .modal-close {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: none;
+            background: rgba(0, 0, 0, 0.6);
             border: none;
             color: var(--text-muted);
             font-size: 1.5rem;
             cursor: pointer;
             transition: color 0.2s;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
         }
 
         .modal-close:hover {
             color: var(--accent-red);
+            background: rgba(0, 0, 0, 0.9);
         }
 
         .modal-title {
@@ -1036,6 +1069,14 @@
 </head>
 <body>
 
+    <!-- Popup bij openen website (goudsskaas.jpg 544x543) -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="img-modal-card">
+            <button class="modal-close" onclick="closeImageModal()">&times;</button>
+            <img src="goudsskaas.jpg" alt="Gouds Skaas" class="popup-img" width="544" height="543">
+        </div>
+    </div>
+
     <!-- Ska Checkerboard Header Accent -->
     <div class="ska-checkerboard"></div>
 
@@ -1393,6 +1434,21 @@
 
     <!-- Scripts -->
     <script>
+        // Automatic Popup Image Modal bij het laden van de pagina
+        document.addEventListener('DOMContentLoaded', () => {
+            const imgModal = document.getElementById('imageModal');
+            if (imgModal) {
+                imgModal.classList.add('active');
+            }
+        });
+
+        function closeImageModal() {
+            const imgModal = document.getElementById('imageModal');
+            if (imgModal) {
+                imgModal.classList.remove('active');
+            }
+        }
+
         // Automatic Past Shows Filter
         function filterPastShows() {
             const today = new Date();
@@ -1470,11 +1526,15 @@
             document.getElementById('rememberMe').checked = false;
         }
 
-        // Sluit modal bij klikken op achtergrond
+        // Sluit modals bij klikken op achtergrond
         window.addEventListener('click', (e) => {
-            const modal = document.getElementById('loginModal');
-            if (e.target === modal) {
+            const loginModal = document.getElementById('loginModal');
+            const imageModal = document.getElementById('imageModal');
+            if (e.target === loginModal) {
                 closeLoginModal();
+            }
+            if (e.target === imageModal) {
+                closeImageModal();
             }
         });
 
