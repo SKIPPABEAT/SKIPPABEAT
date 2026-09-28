@@ -187,7 +187,7 @@
             cursor: pointer;
         }
 
-        /* Modal / Popup Styling */
+        /* Modal / Popup Styling (Algemeen & Inloggen) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -200,10 +200,13 @@
             align-items: center;
             z-index: 2000;
             backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .modal-overlay.active {
             display: flex;
+            opacity: 1;
         }
 
         .modal-card {
@@ -217,62 +220,58 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
         }
 
-        /* Image Popup Modal Card Styling */
-        .img-modal-card {
-            background-color: var(--bg-card);
-            border: 2px solid var(--accent-yellow);
-            border-radius: 8px;
-            width: 90%;
-            max-width: 544px;
-            padding: 10px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup-img {
-            width: 100%;
-            height: auto;
-            max-width: 544px;
-            max-height: 543px;
-            object-fit: contain;
-            border-radius: 4px;
-            display: block;
-        }
-
         .modal-close {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: rgba(0, 0, 0, 0.6);
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.2s;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--border-gray);
+            border-radius: 50%;
             width: 32px;
             height: 32px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--text-white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
             z-index: 10;
         }
 
         .modal-close:hover {
-            color: var(--accent-red);
-            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            background-color: var(--accent-red);
+            border-color: var(--accent-red);
         }
 
-        .modal-title {
-            font-family: 'Permanent Marker', cursive;
-            color: var(--accent-yellow);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            border-bottom: 1px dashed var(--border-gray);
-            padding-bottom: 10px;
+        /* Welkomst Promo Popup Specifieke Styling */
+        .promo-modal-card {
+            background-color: var(--bg-card);
+            border: 3px solid var(--accent-yellow);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 544px; /* Originele afbeeldingsbreedte */
+            padding: 12px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255, 204, 0, 0.3);
+            text-align: center;
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .promo-img {
+            width: 100%;
+            max-width: 544px;
+            height: auto;
+            aspect-ratio: 544 / 543;
+            object-fit: contain;
+            display: block;
+            border-radius: 6px;
         }
 
         .login-form {
@@ -1069,11 +1068,11 @@
 </head>
 <body>
 
-    <!-- Popup bij openen website (goudsskaas.jpg 544x543) -->
-    <div class="modal-overlay" id="imageModal">
-        <div class="img-modal-card">
-            <button class="modal-close" onclick="closeImageModal()">&times;</button>
-            <img src="goudsskaas.jpg" alt="Gouds Skaas" class="popup-img" width="544" height="543">
+    <!-- Welkomst Promo Popup bij openen website -->
+    <div class="modal-overlay" id="welcomePromoModal">
+        <div class="promo-modal-card">
+            <button class="modal-close" onclick="closeWelcomeModal()">&times;</button>
+            <img src="goudsskaas.jpg" alt="Gouds SKA Festival - SKIPPABEAT" class="promo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/544x543/161616/ffcc00?text=GOUDS+SKAAS';">
         </div>
     </div>
 
@@ -1158,7 +1157,7 @@
                     </li>
                     <li class="optional-date-item">
                         <strong>Za 15 mei</strong>
-                        <span>Rock on the Kiosk, Phillipine</span>
+                        <span>Rock on the Kiosk, Phillipine <small style="color: var(--text-muted);">(waarschijnlijk niet)</small></span>
                     </li>
                     <li class="optional-date-item">
                         <strong>Zo 16 mei</strong>
@@ -1434,20 +1433,33 @@
 
     <!-- Scripts -->
     <script>
-        // Automatic Popup Image Modal bij het laden van de pagina
-        document.addEventListener('DOMContentLoaded', () => {
-            const imgModal = document.getElementById('imageModal');
-            if (imgModal) {
-                imgModal.classList.add('active');
-            }
-        });
+        // Welkomst Promo Modal Functie (Slechts 1x per sessie + sluit automatisch na 5s)
+        let welcomeTimer;
 
-        function closeImageModal() {
-            const imgModal = document.getElementById('imageModal');
-            if (imgModal) {
-                imgModal.classList.remove('active');
+        function closeWelcomeModal() {
+            const modal = document.getElementById('welcomePromoModal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+            if (welcomeTimer) {
+                clearTimeout(welcomeTimer);
             }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const hasSeenPromo = sessionStorage.getItem('skippa_promo_seen');
+
+            if (!hasSeenPromo) {
+                const welcomeModal = document.getElementById('welcomePromoModal');
+                welcomeModal.classList.add('active');
+                sessionStorage.setItem('skippa_promo_seen', 'true');
+
+                // Sluit automatisch na 5000 ms (5 seconden)
+                welcomeTimer = setTimeout(() => {
+                    closeWelcomeModal();
+                }, 5000);
+            }
+        });
 
         // Automatic Past Shows Filter
         function filterPastShows() {
@@ -1526,15 +1538,23 @@
             document.getElementById('rememberMe').checked = false;
         }
 
-        // Sluit modals bij klikken op achtergrond
+        // Sluit modals bij klikken op achtergrond of ESC-toets
         window.addEventListener('click', (e) => {
             const loginModal = document.getElementById('loginModal');
-            const imageModal = document.getElementById('imageModal');
+            const welcomeModal = document.getElementById('welcomePromoModal');
+            
             if (e.target === loginModal) {
                 closeLoginModal();
             }
-            if (e.target === imageModal) {
-                closeImageModal();
+            if (e.target === welcomeModal) {
+                closeWelcomeModal();
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeWelcomeModal();
+                closeLoginModal();
             }
         });
 
