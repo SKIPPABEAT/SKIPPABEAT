@@ -251,12 +251,16 @@
             border: 3px solid var(--accent-yellow);
             border-radius: 12px;
             width: 90%;
-            max-width: 544px; /* Originele afbeeldingsbreedte */
+            max-width: 500px; /* Netjes responsive geschaald voor zowel vierkante als staande afbeeldingen */
+            max-height: 90vh;
             padding: 12px;
             position: relative;
             box-shadow: 0 0 30px rgba(255, 204, 0, 0.3);
             text-align: center;
             animation: popIn 0.3s ease-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         @keyframes popIn {
@@ -266,9 +270,8 @@
 
         .promo-img {
             width: 100%;
-            max-width: 544px;
+            max-height: 82vh;
             height: auto;
-            aspect-ratio: 544 / 543;
             object-fit: contain;
             display: block;
             border-radius: 6px;
@@ -1072,7 +1075,7 @@
     <div class="modal-overlay" id="welcomePromoModal">
         <div class="promo-modal-card">
             <button class="modal-close" onclick="closeWelcomeModal()">&times;</button>
-            <img src="goudsskaas.jpg" alt="Gouds SKA Festival - SKIPPABEAT" class="promo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/544x543/161616/ffcc00?text=GOUDS+SKAAS';">
+            <img id="promoImg" src="goudsskaas.jpg" alt="SKIPPABEAT Promo" class="promo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/500x500/161616/ffcc00?text=SKIPPABEAT+LIVE';">
         </div>
     </div>
 
@@ -1447,6 +1450,19 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            const promoImg = document.getElementById('promoImg');
+            const today = new Date();
+            const switchDate = new Date('2026-10-11T00:00:00');
+
+            // Bepaal welke afbeelding er getoond moet worden afhankelijk van de datum
+            if (today >= switchDate) {
+                promoImg.src = 'CRAFFT.jpg';
+                promoImg.alt = 'SKIPPABEAT Live bij CRAFFT';
+            } else {
+                promoImg.src = 'goudsskaas.jpg';
+                promoImg.alt = 'Gouds SKA Festival - SKIPPABEAT';
+            }
+
             const hasSeenPromo = sessionStorage.getItem('skippa_promo_seen');
 
             if (!hasSeenPromo) {
