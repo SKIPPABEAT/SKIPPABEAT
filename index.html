@@ -251,7 +251,7 @@
             border: 3px solid var(--accent-yellow);
             border-radius: 12px;
             width: 90%;
-            max-width: 500px; /* Netjes responsive geschaald voor zowel vierkante als staande afbeeldingen */
+            max-width: 500px;
             max-height: 90vh;
             padding: 12px;
             position: relative;
@@ -482,12 +482,18 @@
         .social-card.songkick:hover i { color: #f80046; }
         .social-card.merch:hover i { color: #e63946; }
 
-        /* Media Grid Layout: Video + Photo Slider side-by-side */
+        /* Media Grid Layout: Multi-Video + Photo Slider */
         .media-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            align-items: stretch;
+            align-items: start;
+        }
+
+        .videos-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         /* Embedded YouTube Video */
@@ -495,7 +501,7 @@
             position: relative;
             width: 100%;
             height: 0;
-            padding-bottom: 75%;
+            padding-bottom: 56.25%;
             overflow: hidden;
             border-radius: 8px;
             border: 3px solid var(--border-gray);
@@ -517,7 +523,7 @@
             position: relative;
             width: 100%;
             height: 0;
-            padding-bottom: 75%;
+            padding-bottom: 118%; /* Aangepast voor mooie uitlijning naast twee videos */
             overflow: hidden;
             border-radius: 8px;
             border: 3px solid var(--border-gray);
@@ -1017,8 +1023,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .video-container, .photo-slider {
-                padding-bottom: 56.25%;
+            .photo-slider {
+                padding-bottom: 75%;
             }
 
             .news-card {
@@ -1211,13 +1217,20 @@
             </div>
         </section>
 
-        <!-- Media Section: YouTube Video & Photo Slider Side-by-Side -->
+        <!-- Media Section: YouTube Videos & Photo Slider Side-by-Side -->
         <section id="media">
             <h2 class="section-title" data-i18n="section-media">Video & Foto's</h2>
             <div class="media-grid">
-                <!-- Video Left -->
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/Vga_2ITu6IU" title="SKIPPABEAT - Promo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <!-- Videos Left Column -->
+                <div class="videos-column">
+                    <!-- Nieuwe Video (Goudse Skaas 2026) -->
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/3ujJyYbPj2A" title="SKIPPABEAT op Goudse Skaas 2026" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <!-- Bestaande Promo Video -->
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/Vga_2ITu6IU" title="SKIPPABEAT - Promo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
                 </div>
 
                 <!-- Photo Slider Right -->
@@ -1243,22 +1256,7 @@
         <section id="agenda">
             <h2 class="section-title" data-i18n="section-agenda">Live Agenda</h2>
             <div class="agenda-list" id="agendaList">
-                <!-- Show 1: 10 Okt 2026 -->
-                <div class="agenda-item" data-date="2026-10-10">
-                    <div class="agenda-date">
-                        <span class="day">10</span>
-                        <span class="month" data-i18n="month-oct">OKT 2026</span>
-                    </div>
-                    <div class="agenda-details">
-                        <h3>GoudSKAfestival</h3>
-                        <p><i class="fas fa-map-marker-alt" style="color: var(--accent-red);"></i> Gouda, NL — Studio Gonz</p>
-                    </div>
-                    <div class="agenda-action">
-                        <a href="https://www.songkick.com/artists/8661379-skippabeat" target="_blank" class="btn-ticket" data-i18n="btn-tickets">Tickets & Info</a>
-                    </div>
-                </div>
-
-                <!-- Show 2: 13 Nov 2026 -->
+                <!-- Show 1: 13 Nov 2026 -->
                 <div class="agenda-item" data-date="2026-11-13">
                     <div class="agenda-date">
                         <span class="day">13</span>
@@ -1298,6 +1296,14 @@
             </div>
             <div class="news-slider-container">
                 <div class="news-grid">
+                    <!-- Nieuwst Bericht: Oktober 2026 -->
+                    <div class="news-card">
+                        <div>
+                            <div class="news-date" data-i18n="news-0-date">Oktober 2026</div>
+                            <h3 data-i18n="news-0-title">Feest met de nieuwe bezetting!</h3>
+                            <p data-i18n="news-0-text">Onze vernieuwde bezetting heeft op 10 oktober een vliegende start gemaakt: het optreden op Gouds Skaas in Gouda werd één groot feest.<br><br>Smaakt dit naar meer? Op 13 november staat de band in CRAFFT Breda, met Skankin' Rebels als voorprogramma. Zorg dat je erbij bent!</p>
+                        </div>
+                    </div>
                     <!-- Bericht 1: September 2026 -->
                     <div class="news-card">
                         <div>
@@ -1655,6 +1661,9 @@
                 "section-music": "Beluister op Spotify",
                 "section-news": "Nieuws & Updates",
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Swipe voor oudere berichten',
+                "news-0-date": "Oktober 2026",
+                "news-0-title": "Feest met de nieuwe bezetting!",
+                "news-0-text": "Onze vernieuwde bezetting heeft op 10 oktober een vliegende start gemaakt: het optreden op Gouds Skaas in Gouda werd één groot feest.<br><br>Smaakt dit naar meer? Op 13 november staat de band in CRAFFT Breda, met Skankin' Rebels als voorprogramma. Zorg dat je erbij bent!",
                 "news-1-date": "September 2026",
                 "news-1-title": "Wat een avond! Afscheid Marco & Mark",
                 "news-1-text": "Op 30 augustus speelden we het laatste optreden met Marco en Mark in Café Parkzicht, Breda. De zaal was tot de nok gevuld, de sfeer intens, het feest groots. Samen met jullie hebben we hun jarenlange inzet, energie en muzikaliteit gevierd. Dank aan iedereen die deze bijzondere avond heeft gedeeld!",
@@ -1718,6 +1727,9 @@
                 "section-music": "Listen on Spotify",
                 "section-news": "News & Updates",
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Swipe for older posts',
+                "news-0-date": "October 2026",
+                "news-0-title": "Party with the new lineup!",
+                "news-0-text": "Our renewed lineup got off to a flying start on October 10th: the performance at Gouds Skaas in Gouda was one big party.<br><br>Want to hear more? On November 13th, the band plays at CRAFFT Breda with Skankin' Rebels as support act. Be there!",
                 "news-1-date": "September 2026",
                 "news-1-title": "What a night! Farewell Marco & Mark",
                 "news-1-text": "On August 30th we played our final show with Marco and Mark at Café Parkzicht, Breda. The venue was packed to the brim, the atmosphere intense, and the party wild. Together with you, we celebrated their years of dedication, energy, and music. Thank you to everyone who shared this special night with us!",
@@ -1781,6 +1793,9 @@
                 "section-music": "Écoutez sur Spotify",
                 "section-news": "Actualités & Mises à jour",
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Glissez pour les anciens messages',
+                "news-0-date": "Octobre 2026",
+                "news-0-title": "Fête avec la nouvelle formation !",
+                "news-0-text": "Notre nouvelle formation a démarré sur les chapeaux de roue le 10 octobre : notre concert à Gouds Skaas à Gouda a été une vraie fête.<br><br>Vous en voulez encore ? Le 13 novembre, le groupe sera à CRAFFT Breda, avec Skankin' Rebels en première partie. Soyez au rendez-vous !",
                 "news-1-date": "Septembre 2026",
                 "news-1-title": "Quelle soirée ! Adieu Marco & Mark",
                 "news-1-text": "Le 30 août, nous avons joué notre dernier concert avec Marco et Mark au Café Parkzicht à Breda. La salle était comble, l'ambiance intense et la fête incroyable. Merci à tous d'avoir partagé cette soirée spéciale avec nous !",
@@ -1844,6 +1859,9 @@
                 "section-music": "Auf Spotify hören",
                 "section-news": "Neuigkeiten & Updates",
                 "swipe-hint": '<i class="fas fa-arrow-right"></i> Wischen für ältere Beiträge',
+                "news-0-date": "Oktober 2026",
+                "news-0-title": "Party mit der neuen Besetzung!",
+                "news-0-text": "Unsere erneuerte Besetzung hat am 10. Oktober einen Raketenstart hingelegt: Der Auftritt bei Gouds Skaas in Gouda war ein riesiges Fest.<br><br>Lust auf mehr? Am 13. November steht die Band im CRAFFT Breda, mit Skankin' Rebels als Vorband. Sei dabei!",
                 "news-1-date": "September 2026",
                 "news-1-title": "Was für ein Abend! Abschied Marco & Mark",
                 "news-1-text": "Am 30. August spielten wir die letzte Show mit Marco und Mark im Café Parkzicht in Breda. Der Saal war gesteckt voll, die Stimmung intensiv, das Fest riesig. Danke an alle, die diesen besonderen Abend mit uns geteilt haben!",
@@ -1863,7 +1881,7 @@
                 "about-title-prefix": "Über",
                 "bio-p1": "Die Ska-Band <strong>SKIPPABEAT</strong> aus Breda (Niederlande) ist zu einer festen Größe geworden. Mit ihren erstklassigen Musikern liefert SKIPPABEAT eine energiegeladene Ska-Show, die jeden zum Tanzen bringt!",
                 "quote-text": '"Ska mit einem großen S, Punk mit einem Augenzwinkern, ansteckend wie verrückt."',
-                "bio-p2": "Seit 12 Jahren stellt SKIPPABEAT jede Bühne mit mitreißenden Ska-Shows auf den Kopf! Aus der Asche von Manoman entstanden, hat sich die Truppe zu einer gut geölten Ska-Maschine entwickelt, die mitreißenden Ska, rauem Punk und satten Reggae im Eiltempo abliefert.",
+                "bio-p2": "Seit 12 Jahren stellt SKIPPABEAT jede Bühne mit mitreißenden Ska-Shows auf den Kopf! Aus der Asche von Manoman entstanden, hat sich die Truppe zu einer gut geölten Ska-Maschine entwickelt, die mitreißenden Ska, rauem Punk und satten Reggae im Eiltempo ablifert.",
                 "bio-p3": "Kraftvoller Gesang, ein explosiver MC kombiniert mit dicken Samples, eine pumpende Rhythmusgruppe und fett geblasene Bläsersätze sind der Treibstoff für ein energetisches Live-Erlebnis. Stillstehen gibt es nicht; jeder Auftritt wird zu einer ausgelassenen Party.",
                 "bio-p4": "Bewaffnet mit eigenen Tracks und unaufhaltsamer Live-Energie tourt die Band durch Festivals, Clubs und Kneipen. Zieh deine Tanzschuhe an, denn wenn SKIPPABEAT speelt, bebt der Saal!",
                 "lineup-title": "Bandbesetzung",
