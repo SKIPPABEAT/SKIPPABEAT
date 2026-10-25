@@ -150,10 +150,14 @@
             color: var(--accent-yellow);
         }
 
-        /* Footer Login Button */
+        /* Footer Login Buttons Container */
         .bottom-login-container {
             text-align: center;
             margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .nav-login-btn {
@@ -523,7 +527,7 @@
             position: relative;
             width: 100%;
             height: 0;
-            padding-bottom: 118%; /* Aangepast voor mooie uitlijning naast twee videos */
+            padding-bottom: 118%;
             overflow: hidden;
             border-radius: 8px;
             border: 3px solid var(--border-gray);
@@ -1072,6 +1076,15 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .bottom-login-container {
+                flex-direction: column;
+            }
+
+            .nav-login-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -1178,6 +1191,29 @@
                     </li>
                 </ul>
                 <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Uitloggen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Popup voor Rider & Stageplan -->
+    <div class="modal-overlay" id="riderModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeRiderModal()">&times;</button>
+            <div id="riderSection">
+                <h3 class="modal-title"><i class="fas fa-sliders-h"></i> Band Rider & Stageplan</h3>
+                <p style="margin-bottom: 15px; color: var(--text-muted); font-size: 0.95rem; font-weight: bold;">
+                    Voer het wachtwoord in voor de technische specificaties.
+                </p>
+                <form class="login-form" onsubmit="handleRiderLogin(event)">
+                    <input type="password" id="riderPasswordInput" class="login-input" placeholder="Wachtwoord..." required>
+                    
+                    <label class="remember-me">
+                        <input type="checkbox" id="riderRememberMe"> Onthoud mij op dit apparaat
+                    </label>
+
+                    <p class="error-msg" id="riderErrorMsg">Onjuist wachtwoord! Probeer opnieuw.</p>
+                    <button type="submit" class="login-btn-submit">Open Rider</button>
+                </form>
             </div>
         </div>
     </div>
@@ -1422,10 +1458,13 @@
             </div>
         </section>
 
-        <!-- Inlogknop helemaal onderaan onder Contact -->
+        <!-- Inlogknoppen helemaal onderaan onder Contact -->
         <div class="bottom-login-container">
             <button class="nav-login-btn" onclick="openLoginModal()" title="Inloggen voor optionele data">
                 <i class="fas fa-lock"></i> Inlog Band
+            </button>
+            <button class="nav-login-btn" onclick="openRiderModal()" title="Band Rider & Stageplan bekijken">
+                <i class="fas fa-sliders-h"></i> Band Rider & Stageplan
             </button>
         </div>
 
@@ -1442,6 +1481,8 @@
 
     <!-- Scripts -->
     <script>
+        const RIDER_URL = "https://skippabeat.github.io/SKIPPABEAT/rider_skippabeat.html";
+
         // Welkomst Promo Modal Functie (Slechts 1x per sessie + sluit automatisch na 5s)
         let welcomeTimer;
 
@@ -1560,10 +1601,42 @@
             document.getElementById('rememberMe').checked = false;
         }
 
+        // Rider Modal Logica
+        function openRiderModal() {
+            if (localStorage.getItem('skippa_rider_logged_in') === 'true') {
+                window.open(RIDER_URL, '_blank');
+            } else {
+                document.getElementById('riderModal').classList.add('active');
+                document.getElementById('riderPasswordInput').value = '';
+                document.getElementById('riderErrorMsg').style.display = 'none';
+            }
+        }
+
+        function closeRiderModal() {
+            document.getElementById('riderModal').classList.remove('active');
+        }
+
+        function handleRiderLogin(e) {
+            e.preventDefault();
+            const inputVal = document.getElementById('riderPasswordInput').value;
+            const remember = document.getElementById('riderRememberMe').checked;
+
+            if (inputVal === 'beataskip') {
+                if (remember) {
+                    localStorage.setItem('skippa_rider_logged_in', 'true');
+                }
+                closeRiderModal();
+                window.open(RIDER_URL, '_blank');
+            } else {
+                document.getElementById('riderErrorMsg').style.display = 'block';
+            }
+        }
+
         // Sluit modals bij klikken op achtergrond of ESC-toets
         window.addEventListener('click', (e) => {
             const loginModal = document.getElementById('loginModal');
             const welcomeModal = document.getElementById('welcomePromoModal');
+            const riderModal = document.getElementById('riderModal');
             
             if (e.target === loginModal) {
                 closeLoginModal();
@@ -1571,12 +1644,16 @@
             if (e.target === welcomeModal) {
                 closeWelcomeModal();
             }
+            if (e.target === riderModal) {
+                closeRiderModal();
+            }
         });
 
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeWelcomeModal();
                 closeLoginModal();
+                closeRiderModal();
             }
         });
 
