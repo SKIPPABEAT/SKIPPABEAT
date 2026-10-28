@@ -6,16 +6,17 @@
   <title>SKIPPABEAT - Banddashboard</title>
   <style>
     :root {
-      --bg: #111111;
-      --card-bg: #1c1c1e;
+      --bg: #121214;
+      --card-bg: #1e1e24;
+      --card-border: #33333c;
       --yellow: #f4e61e;
       --yellow-hover: #d8ca13;
       --text: #ffffff;
-      --muted: #aaaaaa;
+      --muted: #a0a0ab;
       --green: #30d981;
       --red: #ff5364;
       --orange: #ff9f0a;
-      --border: #2c2c2e;
+      --input-bg: #2a2a32;
     }
     * { box-sizing: border-box; }
     body {
@@ -28,15 +29,15 @@
 
     /* SKA CHECKER PATTERN */
     .checker-bar {
-      height: 12px;
+      height: 14px;
       background-color: #fff;
       background-image: 
         linear-gradient(45deg, #000 25%, transparent 25%), 
         linear-gradient(-45deg, #000 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, #000 75%), 
         linear-gradient(-45deg, transparent 75%, #000 75%);
-      background-size: 12px 12px;
-      background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+      background-size: 14px 14px;
+      background-position: 0 0, 0 7px, 7px -7px, -7px 0;
     }
 
     header {
@@ -64,15 +65,15 @@
       padding: 20px 16px;
     }
 
-    /* LOGIN MODAL / CARD */
+    /* LOGIN MODAL */
     .login-card {
       background: var(--card-bg);
       border: 2px solid var(--yellow);
       border-radius: 12px;
-      padding: 24px;
-      max-width: 400px;
+      padding: 28px;
+      max-width: 420px;
       margin: 40px auto;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
     }
 
     /* USER BAR */
@@ -80,10 +81,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #1c1c1e;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 18px;
       margin-bottom: 24px;
     }
     .user-info { font-weight: bold; color: var(--yellow); }
@@ -91,10 +92,11 @@
     /* CARDS */
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--border);
+      border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 20px;
+      padding: 22px;
       margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
     }
     .card h2 {
       margin-top: 0;
@@ -102,8 +104,8 @@
       text-transform: uppercase;
       font-size: 1.25rem;
       letter-spacing: 1px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -112,3 +114,526 @@
     /* FORMS & INPUTS */
     label {
       display: block;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      background: var(--input-bg);
+      border: 1px solid #444452;
+      border-radius: 8px;
+      color: #ffffff;
+      font: inherit;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--yellow);
+      border-color: var(--yellow);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .span-all { grid-column: 1 / -1; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 18px;
+      background: var(--yellow);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .btn:hover { background: var(--yellow-hover); }
+    .btn-small {
+      width: auto;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      margin-top: 0;
+    }
+    .btn-danger {
+      background: var(--red);
+      color: #fff;
+    }
+    .btn-danger:hover { background: #e04353; }
+
+    /* EVENT LIST */
+    .event-card {
+      background: #25252d;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+    .event-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .event-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #ffffff;
+      margin: 0;
+    }
+    .badge-type {
+      background: var(--yellow);
+      color: #000;
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 4px 9px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .event-meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* STATUS BUTTONS */
+    .status-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .status-btn {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: #18181c;
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .status-btn.active-yes { background: var(--green); color: #000; border-color: var(--green); }
+    .status-btn.active-no { background: var(--red); color: #fff; border-color: var(--red); }
+    .status-btn.active-maybe { background: var(--orange); color: #000; border-color: var(--orange); }
+
+    /* ROSTER MATRIX */
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      gap: 6px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--card-border);
+    }
+    .roster-item {
+      font-size: 0.78rem;
+      padding: 7px 9px;
+      border-radius: 6px;
+      background: #18181c;
+      border: 1px solid #2e2e38;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .st-yes { color: var(--green); font-weight: bold; }
+    .st-no { color: var(--red); font-weight: bold; }
+    .st-maybe { color: var(--orange); font-weight: bold; }
+    .st-open { color: #777; }
+
+    /* ABSENCE LIST */
+    .absence-list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+    }
+    .absence-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: #18181c;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 8px;
+    }
+
+    .badge-user {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--yellow);
+      color: var(--yellow);
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .span-all { grid-column: auto; }
+      .roster-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="checker-bar"></div>
+
+<header>
+  <h1>SKIPPABEAT</h1>
+  <p>Bandbeheer Dashboard</p>
+</header>
+
+<div class="container">
+
+  <!-- INLOGSCHERM -->
+  <div id="loginSection" class="login-card">
+    <h2 style="justify-content: center; margin-bottom: 16px;">Inloggen</h2>
+    <div id="loginError" style="color: var(--red); font-size:0.85rem; margin-bottom:12px; text-align:center;" class="hidden">Onjuist wachtwoord!</div>
+    <form id="loginForm">
+      <label>Selecteer je naam:</label>
+      <select id="loginMember" required>
+        <!-- Wordt via JS opgevuld -->
+      </select>
+
+      <label>Wachtwoord:</label>
+      <input type="password" id="loginPassword" placeholder="Beataskip" required>
+
+      <button type="submit" class="btn">Inloggen</button>
+    </form>
+  </div>
+
+  <!-- HOOFD DASHBOARD -->
+  <div id="dashboardSection" class="hidden">
+    
+    <!-- INGELOGD BALK -->
+    <div class="user-bar">
+      <div>Ingelogd als: <span id="currentUserDisplay" class="user-info"></span></div>
+      <button id="logoutBtn" class="btn btn-small btn-danger">Uitloggen</button>
+    </div>
+
+    <!-- OVERZICHT EVENEMENTEN -->
+    <div class="card">
+      <h2>Planning & Aanwezigheid</h2>
+      <div id="eventsList">
+        <p style="color: var(--muted);">Laden van evenementen...</p>
+      </div>
+    </div>
+
+    <!-- EVENEMENT TOEVOEGEN -->
+    <div class="card">
+      <h2>Evenement Toevoegen</h2>
+      <form id="addEventForm">
+        <div class="form-grid">
+          <div>
+            <label>Soort</label>
+            <select id="evType" required>
+              <option value="Repetitie">Repetitie</option>
+              <option value="Optreden">Optreden</option>
+            </select>
+          </div>
+          <div>
+            <label>Titel</label>
+            <input type="text" id="evTitle" placeholder="Bijv. Optreden Popzaal" required>
+          </div>
+          <div>
+            <label>Datum & Tijd</label>
+            <input type="datetime-local" id="evDate" required>
+          </div>
+          <div>
+            <label>Locatie</label>
+            <input type="text" id="evLocation" placeholder="Locatie / Zaal">
+          </div>
+          <div class="span-all">
+            <label>Interne Informatie</label>
+            <textarea id="evInfo" rows="2" placeholder="Soundcheck tijden, gage, afspraken..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn">Evenement Opslaan</button>
+      </form>
+    </div>
+
+    <!-- AFWEZIGHEID REGISTREREN -->
+    <div class="card">
+      <h2>Afwezigheid Registreren</h2>
+      <p style="color: var(--muted); font-size: 0.85rem; margin-top: 0;">
+        Geef hier aan wanneer je op vakantie of verhinderd bent.
+      </p>
+      <form id="addAbsenceForm">
+        <div style="margin-bottom: 12px;">
+          <span class="badge-user" id="absenceUserBadge">...</span>
+        </div>
+        <div class="form-grid">
+          <div>
+            <label>Van</label>
+            <input type="date" id="absFrom" required>
+          </div>
+          <div>
+            <label>Tot en met</label>
+            <input type="date" id="absUntil" required>
+          </div>
+          <div class="span-all">
+            <label>Reden / Opmerking</label>
+            <input type="text" id="absReason" placeholder="Bijv. Vakantie" required>
+          </div>
+        </div>
+        <button type="submit" class="btn">Afwezigheid Opslaan</button>
+      </form>
+
+      <h3 style="color: var(--muted); font-size:0.9rem; margin-top: 24px; text-transform: uppercase;">
+        Mijn geregistreerde afwezigheden
+      </h3>
+      <ul id="myAbsenceList" class="absence-list">
+        <!-- Wordt via JS ingevuld -->
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+// Volledige API URL naar jouw Synology NAS
+const API_URL = 'https://atnrijen.synology.me/web/api.php';
+
+const MEMBERS = [
+  "Mariska Kerst", "Michael Benjaminsz", "Erik De Ridder", "Dirk Kleemans",
+  "Sander Martinet", "Hans Albers", "Tim Schrijver", "Renate de Jong",
+  "Wouter van Bavel", "Leo van Mook", "Diederik Smits"
+];
+
+let currentUser = sessionStorage.getItem('skippabeat_user') || null;
+let state = {
+  events: [],
+  absences: [],
+  attendance: {}
+};
+
+const loginSection = document.getElementById('loginSection');
+const dashboardSection = document.getElementById('dashboardSection');
+const loginMember = document.getElementById('loginMember');
+const loginPassword = document.getElementById('loginPassword');
+const loginError = document.getElementById('loginError');
+const currentUserDisplay = document.getElementById('currentUserDisplay');
+const absenceUserBadge = document.getElementById('absenceUserBadge');
+const eventsList = document.getElementById('eventsList');
+const myAbsenceList = document.getElementById('myAbsenceList');
+
+function init() {
+  loginMember.innerHTML = MEMBERS.map(m => `<option value="${m}">${m}</option>`).join('');
+
+  if (currentUser) {
+    showDashboard();
+  } else {
+    showLogin();
+  }
+}
+
+document.getElementById('loginForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (loginPassword.value === 'Beataskip') {
+    currentUser = loginMember.value;
+    sessionStorage.setItem('skippabeat_user', currentUser);
+    loginError.classList.add('hidden');
+    showDashboard();
+  } else {
+    loginError.classList.remove('hidden');
+  }
+});
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  currentUser = null;
+  sessionStorage.removeItem('skippabeat_user');
+  showLogin();
+});
+
+function showLogin() {
+  loginSection.classList.remove('hidden');
+  dashboardSection.classList.add('hidden');
+  loginPassword.value = '';
+}
+
+function showDashboard() {
+  loginSection.classList.add('hidden');
+  dashboardSection.classList.remove('hidden');
+  currentUserDisplay.textContent = currentUser;
+  absenceUserBadge.textContent = currentUser;
+  loadDataFromNAS();
+}
+
+async function loadDataFromNAS() {
+  try {
+    const res = await fetch(`${API_URL}?action=get_data`);
+    const data = await res.json();
+    state.events = data.events || [];
+    state.absences = data.absences || [];
+    state.attendance = data.attendance || {};
+    render();
+  } catch (err) {
+    console.error("Fout bij laden van NAS:", err);
+    eventsList.innerHTML = `<p style="color:var(--red);">Kon geen verbinding maken met api.php op https://atnrijen.synology.me/web/api.php</p>`;
+  }
+}
+
+async function sendToNAS(action, payload) {
+  try {
+    await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, ...payload })
+    });
+    await loadDataFromNAS();
+  } catch (err) {
+    console.error("Fout bij opslaan naar NAS:", err);
+  }
+}
+
+window.setStatus = function(eventId, status) {
+  sendToNAS('set_status', {
+    event_id: eventId,
+    member: currentUser,
+    status: status
+  });
+};
+
+document.getElementById('addEventForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const payload = {
+    type: document.getElementById('evType').value,
+    title: document.getElementById('evTitle').value,
+    date: document.getElementById('evDate').value,
+    location: document.getElementById('evLocation').value,
+    info: document.getElementById('evInfo').value
+  };
+  sendToNAS('add_event', payload);
+  e.target.reset();
+});
+
+window.deleteEvent = function(eventId) {
+  if (confirm("Weet je zeker dat je dit evenement wilt verwijderen?")) {
+    sendToNAS('delete_event', { event_id: eventId });
+  }
+};
+
+document.getElementById('addAbsenceForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const payload = {
+    member: currentUser,
+    date_from: document.getElementById('absFrom').value,
+    date_until: document.getElementById('absUntil').value,
+    reason: document.getElementById('absReason').value
+  };
+  sendToNAS('add_absence', payload);
+  e.target.reset();
+});
+
+window.deleteAbsence = function(absenceId) {
+  if (confirm("Wil je deze afwezigheid verwijderen?")) {
+    sendToNAS('delete_absence', { absence_id: absenceId, member: currentUser });
+  }
+};
+
+function isMemberAbsentOnDate(member, dateStr) {
+  if (!dateStr) return false;
+  const evDate = dateStr.split('T')[0];
+  return state.absences.some(a => 
+    a.member === member && evDate >= a.date_from && evDate <= a.date_until
+  );
+}
+
+function render() {
+  if (state.events.length === 0) {
+    eventsList.innerHTML = `<p style="color: var(--muted);">Geen geplande evenementen.</p>`;
+  } else {
+    eventsList.innerHTML = state.events.map(ev => {
+      const evAtt = state.attendance[ev.id] || {};
+      const myStatus = evAtt[currentUser] || 'unanswered';
+      
+      const formattedDate = new Date(ev.date).toLocaleString('nl-NL', {
+        weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
+      });
+
+      const rosterHtml = MEMBERS.map(m => {
+        const isAbsentByDate = isMemberAbsentOnDate(m, ev.date);
+        let statusText = 'Open';
+        let statusClass = 'st-open';
+
+        if (isAbsentByDate) {
+          statusText = 'Vakantie';
+          statusClass = 'st-no';
+        } else {
+          const st = evAtt[m];
+          if (st === 'yes') { statusText = 'Aanwezig'; statusClass = 'st-yes'; }
+          else if (st === 'no') { statusText = 'Afwezig'; statusClass = 'st-no'; }
+          else if (st === 'maybe') { statusText = 'Misschien'; statusClass = 'st-maybe'; }
+        }
+
+        return `<div class="roster-item">
+          <span>${m.split(' ')[0]}</span>
+          <span class="${statusClass}">${statusText}</span>
+        </div>`;
+      }).join('');
+
+      return `
+        <div class="event-card">
+          <div class="event-header">
+            <h3 class="event-title">${ev.title}</h3>
+            <span class="badge-type">${ev.type}</span>
+          </div>
+          <div class="event-meta">
+            📅 ${formattedDate} ${ev.location ? '· 📍 ' + ev.location : ''}
+          </div>
+          ${ev.info ? `<div style="font-size:0.85rem; color:#d0d0d8; margin-bottom:12px;">ℹ️ ${ev.info}</div>` : ''}
+
+          <div style="font-size:0.8rem; font-weight:bold; color:var(--muted); margin-top:10px;">Mijn Status:</div>
+          <div class="status-actions">
+            <button class="status-btn ${myStatus === 'yes' ? 'active-yes' : ''}" onclick="setStatus(${ev.id}, 'yes')">Aanwezig</button>
+            <button class="status-btn ${myStatus === 'maybe' ? 'active-maybe' : ''}" onclick="setStatus(${ev.id}, 'maybe')">Misschien</button>
+            <button class="status-btn ${myStatus === 'no' ? 'active-no' : ''}" onclick="setStatus(${ev.id}, 'no')">Afwezig</button>
+          </div>
+
+          <div class="roster-grid">
+            ${rosterHtml}
+          </div>
+
+          <div style="text-align:right; margin-top:14px;">
+            <button class="btn btn-small btn-danger" onclick="deleteEvent(${ev.id})">Verwijderen</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  const myAbs = state.absences.filter(a => a.member === currentUser);
+  if (myAbs.length === 0) {
+    myAbsenceList.innerHTML = `<li style="color:var(--muted); font-size:0.85rem; padding:8px 0;">Geen afwezigheden ingevoerd.</li>`;
+  } else {
+    myAbsenceList.innerHTML = myAbs.map(a => `
+      <li class="absence-item">
+        <div>
+          <strong>${a.date_from} t/m ${a.date_until}</strong><br>
+          <small style="color:var(--muted);">${a.reason}</small>
+        </div>
+        <button class="btn btn-small btn-danger" onclick="deleteAbsence(${a.id})">X</button>
+      </li>
+    `).join('');
+  }
+}
+
+init();
+</script>
+</body>
+</html>
